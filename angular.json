@@ -43,9 +43,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -55,6 +53,13 @@
               }
             ],
             "styles": [
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "src/themes/generated/theme.base.dark.css",
+              "src/themes/generated/theme.base.css",
+              "src/themes/generated/theme.additional.dark.css",
+              "src/themes/generated/theme.additional.css",
+              "src/dx-styles.scss",
+              "src/variables.scss",
               "src/styles.scss"
             ]
           },
@@ -63,8 +68,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4mb",
+                  "maximumError": "7mb"
                 },
                 {
                   "type": "anyComponentStyle",
