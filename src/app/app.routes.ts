@@ -9,8 +9,14 @@ import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
+import { NfeComponent } from './pages/nfe/nfe.component';
 
 export const routes: Routes = [
+  {
+    path: 'pages/nfe',
+    component: NfeComponent,
+    canActivate: [AuthGuardService],
+  },
   {
     path: 'tasks',
     component: TasksComponent,

@@ -19,4 +19,9 @@ export const navigation: NavigationItem[] = [
       },
     ],
   },
+  {
+    text: 'Nfe',
+    path: '/pages/nfe',
+    icon: 'folder',
+  },
 ];
