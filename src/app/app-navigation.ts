@@ -24,4 +24,14 @@ export const navigation: NavigationItem[] = [
     path: '/pages/nfe',
     icon: 'folder',
   },
+  {
+    text: 'Clientes',
+    path: '/pages/clientes',
+    icon: 'group',
+  },
+  {
+    text: 'Produtos',
+    path: '/pages/produtos',
+    icon: 'box',
+  },
 ];
