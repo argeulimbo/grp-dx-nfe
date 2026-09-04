@@ -9,25 +9,19 @@ import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
-import { NfeComponent } from './pages/nfe/nfe.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
-import { ProdutosComponent } from './pages/produtos/produtos.component';
+import { DocumentosComponent } from './pages/documentos/documentos.component';
 
 export const routes: Routes = [
   {
-    path: 'pages/produtos',
-    component: ProdutosComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'pages/clientes',
+    path: 'nfe/clientes',
     component: ClientesComponent,
     canActivate: [AuthGuardService],
   },
   {
-    path: 'pages/nfe',
-    component: NfeComponent,
-    canActivate: [AuthGuardService],
+    path: 'nfe/documentos',
+    component: DocumentosComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'tasks',

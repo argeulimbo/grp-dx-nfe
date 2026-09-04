@@ -20,18 +20,17 @@ export const navigation: NavigationItem[] = [
     ],
   },
   {
-    text: 'Nfe',
-    path: '/pages/nfe',
+    text: 'NF-e',
     icon: 'folder',
-  },
-  {
-    text: 'Clientes',
-    path: '/pages/clientes',
-    icon: 'group',
-  },
-  {
-    text: 'Produtos',
-    path: '/pages/produtos',
-    icon: 'box',
-  },
+    items: [
+      {
+        text: 'Documentos',
+        path: '/nfe/documentos',
+      },
+      {
+        text: 'Clientes',
+        path: '/nfe/clientes',
+      }
+    ]
+  }
 ];
