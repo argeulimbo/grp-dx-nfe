@@ -3,8 +3,16 @@
   <!-- Container Pai & Abaixo do Título -->
   <div class="dx-card responsive-paddings">
 
+    <!-- Topo da Página -->
+    <section class="documentos-add">
+      <dx-button
+      text="Novo"
+      (onClick)="createDocumento()"
+      ></dx-button>
+    </section>
+
     <!-- Listagem de Documentos -->
-    <section class="documentos">
+    <section class="documentos-lista">
       <dx-data-grid
       [dataSource]=""
       ></dx-data-grid>
