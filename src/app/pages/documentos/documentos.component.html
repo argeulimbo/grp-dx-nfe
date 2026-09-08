@@ -3,7 +3,7 @@
   <!-- Container Pai & Abaixo do Título -->
   <div class="dx-card responsive-paddings">
 
-    <!-- Topo da Página -->
+    <!-- Criar Nota -->
     <section class="documentos-add">
       <dx-button
       text="Novo"
@@ -13,6 +13,17 @@
       //routerLink="/create-documento"
       (onClick)="createDocumento()"
       ></dx-button>
+    </section>
+
+    <!-- Filtro Documentos -->
+    <section class="search">
+      <dx-text-box
+      class="inputSearch"
+      placeHolder="Digite para buscar (Nº / Fornecedor)"
+      width="350"
+      // [(value)]="filtroPorFornecedor"
+      valueChangeEvent="keyup"
+      ></dx-text-box>
     </section>
 
     <!-- Listagem de Documentos -->
