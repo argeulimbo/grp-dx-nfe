@@ -29,10 +29,4 @@ export class DocumentosComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  createDocumento() {
-    console.log('Dx-Button NOVO acionado')
-  }
-
-
-
 }

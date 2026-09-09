@@ -1,4 +1,3 @@
-<h2>nota-fiscal Fiscais</h2>
 <div class="content-block">
   <!-- Container Pai & Abaixo do Título -->
   <div class="dx-card responsive-paddings">
@@ -10,7 +9,6 @@
       icon="plus"
       type="default"
       stylingMode="contained"
-      //routerLink="/create-documento"
       ></dx-button>
     </section>
 
@@ -20,7 +18,6 @@
       class="inputSearch"
       placeHolder="Digite para buscar (Nº / Fornecedor)"
       width="350"
-      // [(value)]="filtroPorFornecedor"
       valueChangeEvent="keyup"
       ></dx-text-box>
     </section>
@@ -28,7 +25,6 @@
     <!-- Listagem de nota-fiscal -->
     <section class="nota-fiscal-lista">
       <dx-data-grid
-      [dataSource]=""
       ></dx-data-grid>
     </section>
   </div>
