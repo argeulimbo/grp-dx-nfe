@@ -1,3 +1,4 @@
+<h1>Nota Fiscal</h1>
 <div class="content-block">
   <!-- Container Pai & Abaixo do Título -->
   <div class="dx-card responsive-paddings">
@@ -5,10 +6,11 @@
     <!-- Criar Nota -->
     <section class="nota-fiscal-add">
       <dx-button
-      text="Novo"
+      text="Gerar Nota Fiscal"
       icon="plus"
       type="default"
       stylingMode="contained"
+      routerLink="/nfe/notas/criar"
       ></dx-button>
     </section>
 
@@ -16,8 +18,8 @@
     <section class="search">
       <dx-text-box
       class="inputSearch"
-      placeHolder="Digite para buscar (Nº / Fornecedor)"
-      width="350"
+      placeholder="Digite para buscar (Nº NF /Nome Fornecedor)"
+      width="500"
       valueChangeEvent="keyup"
       ></dx-text-box>
     </section>
@@ -25,6 +27,7 @@
     <!-- Listagem de nota-fiscal -->
     <section class="nota-fiscal-lista">
       <dx-data-grid
+      [dataSource]="notas"
       ></dx-data-grid>
     </section>
   </div>

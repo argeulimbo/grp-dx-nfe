@@ -24,8 +24,8 @@ export const navigation: NavigationItem[] = [
     icon: 'folder',
     items: [
       {
-        text: 'Documentos',
-        path: '/nfe/documentos',
+        text: 'Nota Fiscal',
+        path: '/nfe/notas',
       },
       {
         text: 'Clientes',

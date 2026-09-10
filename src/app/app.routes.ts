@@ -10,7 +10,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
-import { DocumentosComponent } from './pages/documentos/documentos.component';
+import { ListaNotaFiscalComponent } from './pages/nota-fiscal/lista-nota-fiscal.component/lista-nota-fiscal.component';
+import { CriarNotaFiscalComponent } from './pages/nota-fiscal/criar-nota-fiscal/criar-nota-fiscal';
 
 export const routes: Routes = [
   {
@@ -19,8 +20,13 @@ export const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'nfe/documentos',
-    component: DocumentosComponent,
+    path: 'nfe/notas',
+    component: ListaNotaFiscalComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'nfe/notas/criar',
+    component: CriarNotaFiscalComponent,
     canActivate: [AuthGuardService]
   },
   {

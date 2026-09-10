@@ -6,7 +6,7 @@ import { NotaFiscal } from '../../pages/documentos/documentos';
 @Injectable({
   providedIn: 'root'
 })
-export class NotaFiscalService<T> {
+export class NotaFiscalService {
 
   // Endpoint NOTAS
   private readonly API = 'http://localhost:8080/notas';
