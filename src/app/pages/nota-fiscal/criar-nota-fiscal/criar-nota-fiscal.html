@@ -1,1 +1,23 @@
-<p>criar-nota-fiscal works!</p>
+<h1>Criar Nota Fiscal</h1>
+
+<div class="content-block">
+  <!-- Container Pai & Abaixo do Título -->
+  <div class="dx-card responsive-paddings">
+
+    <!-- Form Nota Fiscal -->
+    <section>
+    <dx-form id="nota-fiscal-form"
+      [formData]="notas">
+
+      <dxi-item itemType="group" [colCount]="2"/>
+        <dxi-item itemType="group" caption="Dados Nota Fiscal"/>
+          <dxi-item dataField="numero" [isRequired]="true"/>
+          <dxi-item dataField="Cliente" [isRequired]="true"/>
+          <dxi-item dataField="Data Emissão"/>
+
+
+
+    </dx-form>
+    </section>
+  </div>
+</div>

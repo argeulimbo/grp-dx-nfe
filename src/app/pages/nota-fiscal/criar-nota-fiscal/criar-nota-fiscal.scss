@@ -1,0 +1,25 @@
+* {
+  font-family: 'Montserrat';
+}
+
+.content-block {
+  display: flex;
+  justify-content: center;
+}
+
+.dx-card {
+  padding-top: 3rem;
+  width: 60%;
+  height: 50%;
+  align-self: center;
+}
+
+h1 {
+  opacity: 0.4;
+  font-size: 2rem;
+}
+
+#nota-fiscal-form {
+  display: flex;
+  justify-content: flex-start;
+}
