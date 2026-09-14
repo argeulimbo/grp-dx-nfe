@@ -4,14 +4,18 @@
 
 .content-block {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .dx-card {
   padding-top: 3rem;
-  width: 60%;
+  width: 50%;
   height: 50%;
   align-self: center;
+}
+
+dx-select-box {
+  width: 15rem;
 }
 
 h1 {

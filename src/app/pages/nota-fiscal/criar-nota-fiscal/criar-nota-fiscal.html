@@ -6,6 +6,10 @@
 
     <!-- Form Nota Fiscal -->
     <section>
+      <div>
+        <!-- PNG Nota -->
+        <img src="/nf.png" alt="nota-image">
+      </div>
     <dx-form id="nota-fiscal-form"
       [formData]="nota"
       >
@@ -21,7 +25,7 @@
       <dxi-item [isRequired]="true">
         <dxo-label text="Cliente"></dxo-label>
         <div *dxTemplate>
-          <dx-select-box
+          <dx-select-box class="clientes-select-box"
             [dataSource]="clientes"
             displayExpr="nome"
             valueExpr="id"
