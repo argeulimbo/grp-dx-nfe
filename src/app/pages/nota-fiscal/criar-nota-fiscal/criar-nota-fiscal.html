@@ -7,14 +7,31 @@
     <!-- Form Nota Fiscal -->
     <section>
     <dx-form id="nota-fiscal-form"
-      [formData]="notas">
+      [formData]="nota"
+      >
+      <!-- Dados Nota Fiscal Text -->
+      <dxi-item itemType="group" caption="Dados Nota Fiscal"/>
 
-      <dxi-item itemType="group" [colCount]="2"/>
-        <dxi-item itemType="group" caption="Dados Nota Fiscal"/>
-          <dxi-item dataField="numero" [isRequired]="true"    />
-          <dxi-item dataField="Cliente" [isRequired]="true"   />
-          <dxi-item dataField="Data Emissão"
-            [editorOptions]="{ value: dataEmissao }"/>
+      <!-- NF Nota -->
+      <dxi-item dataField="numero" [isRequired]="true">
+        <dxo-label text="Número da Nota"></dxo-label>
+      </dxi-item>
+
+       <!-- Cliente com Seleção e Busca -->
+      <dxi-item [isRequired]="true">
+        <dxo-label text="Cliente"></dxo-label>
+        <div *dxTemplate>
+          <dx-select-box
+            [dataSource]="clientes"
+            displayExpr="nome"
+            valueExpr="id"
+            [(value)]="nota.codigoCliente"
+            [searchEnabled]="true"
+            searchMode="contains"
+            placeHolder="Digite para buscar o cliente..."
+            [noDataText]="'Nenhum cliente encontrado'"/>
+        </div>
+      </dxi-item>
 
 
 

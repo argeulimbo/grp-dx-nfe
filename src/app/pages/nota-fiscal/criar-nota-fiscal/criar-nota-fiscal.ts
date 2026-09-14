@@ -1,29 +1,26 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import { DxFormModule } from 'devextreme-angular';
-import { NotaFiscal } from '../../documentos/documentos';
+import { DxFormModule, DxSelectBoxComponent } from 'devextreme-angular';
+import { Cliente, NotaFiscal } from '../../documentos/documentos';
 
 @Component({
-  imports: [
-    DxFormModule,
-  ],
+  imports: [DxFormModule, DxSelectBoxComponent],
   selector: 'app-criar-nota-fiscal',
   styleUrl: './criar-nota-fiscal.scss',
   templateUrl: './criar-nota-fiscal.html',
 })
 export class CriarNotaFiscalComponent implements OnInit {
+  nota: NotaFiscal = {
+    dataEmissao: new Date(),
+  };
 
-  notas: NotaFiscal[] = [];
+  clientes: Cliente[] = [];
+
   dataEmissao: Date = new Date();
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
-
-  }
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
   }
-
 }
