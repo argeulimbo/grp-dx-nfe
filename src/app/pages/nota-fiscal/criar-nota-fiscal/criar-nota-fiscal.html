@@ -11,9 +11,10 @@
 
       <dxi-item itemType="group" [colCount]="2"/>
         <dxi-item itemType="group" caption="Dados Nota Fiscal"/>
-          <dxi-item dataField="numero" [isRequired]="true"/>
-          <dxi-item dataField="Cliente" [isRequired]="true"/>
-          <dxi-item dataField="Data Emissão"/>
+          <dxi-item dataField="numero" [isRequired]="true"    />
+          <dxi-item dataField="Cliente" [isRequired]="true"   />
+          <dxi-item dataField="Data Emissão"
+            [editorOptions]="{ value: dataEmissao }"/>
 
 
 

@@ -14,6 +14,7 @@ import { NotaFiscal } from '../../documentos/documentos';
 export class CriarNotaFiscalComponent implements OnInit {
 
   notas: NotaFiscal[] = [];
+  dataEmissao: Date = new Date();
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef
