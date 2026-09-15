@@ -14,8 +14,17 @@
   align-self: center;
 }
 
+.img-div {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  width: 20%;
+}
+
 dx-select-box {
-  width: 15rem;
+  width: 31.5rem;
 }
 
 h1 {
@@ -28,3 +37,12 @@ h1 {
   display: flex;
   justify-content: flex-start;
 }
+
+.div-bt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+
