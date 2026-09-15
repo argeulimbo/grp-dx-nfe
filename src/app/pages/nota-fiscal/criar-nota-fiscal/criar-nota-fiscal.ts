@@ -4,6 +4,8 @@ import { DxButtonComponent, DxDataGridComponent, DxFormModule, DxSelectBoxCompon
 import { DxiColumnComponent, DxoDropDownOptionsComponent, DxoEditingComponent, DxoLookupComponent } from 'devextreme-angular/ui/nested';
 import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
 import { RouterLink } from '@angular/router';
+import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
+import { ClienteService } from '../../../shared/services/cliente.service';
 
 @Component({
   imports: [
@@ -34,9 +36,14 @@ export class CriarNotaFiscalComponent implements OnInit {
   clientes: any[] = [];
   produtos: any[] = [];
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private notaFiscalService: NotaFiscalService,
+    private clienteService: ClienteService,
+  ) { }
 
   ngOnInit(): void {
+    this.carregarClientes();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -48,7 +55,9 @@ export class CriarNotaFiscalComponent implements OnInit {
 
   // GET all clientes
   carregarClientes() {
-    return null;
+    this.clienteService.listar().subscribe(listaNotas => {
+      this.clientes = listaNotas;
+    })
   }
 
   // GET all produtos
