@@ -23,12 +23,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './criar-nota-fiscal.html',
 })
 export class CriarNotaFiscalComponent implements OnInit {
+
   nota: any = {
     numero: null,
     codigoCliente: null,
     dataEmissao: new Date(),
-    valorTotal: 0,
-    itens: [],
+    itens: []
   };
 
   clientes: any[] = [];
@@ -67,4 +67,6 @@ export class CriarNotaFiscalComponent implements OnInit {
   salvarNota() {
     return null;
   }
+
+
 }
