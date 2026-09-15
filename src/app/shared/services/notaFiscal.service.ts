@@ -11,7 +11,9 @@ export class NotaFiscalService {
   // Endpoint NOTAS
   private readonly API = 'http://localhost:8080/notas';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   listar(): Observable<NotaFiscal[]> {
     return this.http.get<NotaFiscal[]>(this.API);

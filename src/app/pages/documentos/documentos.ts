@@ -28,3 +28,16 @@ export interface ItemNotaFiscal {
     };
   quantidade?: number;
 }
+
+export interface Produto {
+  id?:              number;
+  codigo?:          string;
+  descricao?:       string;
+  valorUnitario?:   number;
+}
+
+export interface ItemNotaGrid {
+  descricaoProduto?:  string;
+  quantidade?:        number;
+  valorUnitario?:     number;
+}

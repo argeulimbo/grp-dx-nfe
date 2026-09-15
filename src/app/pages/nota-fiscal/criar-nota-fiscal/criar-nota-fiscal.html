@@ -92,8 +92,12 @@
         </dxo-editing>
 
         <!-- Select Produto -->
-        <dxi-column dataField="produtoId" caption="Produto">
-          <dxo-lookup [dataSource]="produtos" displayExpr="descricao" valueExpr="id"></dxo-lookup>
+        <dxi-column dataField="produtoCodigo" caption="Produto">
+          <dxo-lookup [dataSource]="produtos" displayExpr="descricao" valueExpr="id" searchMode="contains"></dxo-lookup>
+        </dxi-column>
+
+        <!-- Valor Unitário -->
+        <dxi-column dataField="valorUnitario" caption="Vlr. Unit">
         </dxi-column>
 
         <!-- Quantidade -->
@@ -106,7 +110,7 @@
 
       <!-- BT Salvar / Cancelar -->
       <div class="div-bt">
-        <dx-button text="Salvar" type="success" (onClick)="salvarNota()"></dx-button>
+        <dx-button text="Salvar" type="success" (onClick)="salvarNota(nota)"></dx-button>
         <dx-button text="Cancelar" type="danger" routerLink="/nfe/notas"></dx-button>
       </div>
 
