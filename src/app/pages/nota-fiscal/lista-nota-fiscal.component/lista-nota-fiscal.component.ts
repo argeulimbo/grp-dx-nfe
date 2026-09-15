@@ -5,8 +5,9 @@ import { DxButtonComponent,
          DxDataGridComponent
         } from 'devextreme-angular';
 import { NotaFiscal } from '../../documentos/documentos';
-import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
+
 import { RouterLink } from "@angular/router";
+import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
 
 @Component({
   imports: [
@@ -26,15 +27,14 @@ export class ListaNotaFiscalComponent implements OnInit {
   filtroPorTexto: string = '';
 
   constructor(
-    private notaFiscalService: NotaFiscalService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private notaFiscalService: NotaFiscalService
   ) { }
 
   ngOnInit(): void {
     this.notaFiscalService.listar().subscribe(listaNotas => {
       this.notas = listaNotas;
-      this.changeDetectorRef.detectChanges();
-    });
+    })
   }
 
   private removerAcentos(texto: string): string {
@@ -45,7 +45,7 @@ export class ListaNotaFiscalComponent implements OnInit {
     if (!this.filtroPorTexto) {
       return this.notas
     }
-    return this.notas.filter(nota => { 
+    return this.notas.filter(nota => {
       return nota.numero?.toLowerCase().includes(this.filtroPorTexto.toLowerCase());
     })
   }
