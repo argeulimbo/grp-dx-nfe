@@ -7,7 +7,7 @@ import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
 
 import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
 import {ClienteService} from '../../../shared/services/cliente.service';
-import { ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
+import { Cliente, ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
 import {ProdutoService} from '../../../shared/services/produto.service';
 
 @Component({
@@ -36,6 +36,12 @@ export class CriarNotaFiscalComponent implements OnInit {
     valorTotal:       0,
     itens:            [] as ItemNotaGrid[]
   };
+
+  argeu: Cliente = {
+    id:    1,
+    codigo:  "A01",
+    nome:    "Argeu Phelipe"
+  }
 
   clientes: any[] = [];
   produtos: Produto[] = [];
@@ -98,6 +104,7 @@ export class CriarNotaFiscalComponent implements OnInit {
     this.notaFiscalService.salvar(nota).subscribe(nota => {
       this.nota = nota;
     });
+    alert('CRUZEIRAO CABULOSO');
   }
 
 

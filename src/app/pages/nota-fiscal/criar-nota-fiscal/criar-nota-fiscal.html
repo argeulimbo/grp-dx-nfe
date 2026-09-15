@@ -43,7 +43,7 @@
 
         </dxi-item>
 
-        <!-- Template Customizado para o SelectBox de Cliente -->
+        <!-- SelectBox de Cliente -->
         <div *dxTemplate="let data of 'clienteSelectTemplate'">
           <dx-select-box class="clientes-select-box"
                          [dataSource]="clientes"
@@ -53,7 +53,9 @@
                          [searchEnabled]="true"
                          searchMode="contains"
                          placeholder="Digite para buscar o cliente..."
-                         noDataText="Nenhum cliente encontrado">
+                         noDataText="Nenhum cliente encontrado"
+
+          >
 
             <!-- Ícone do campo -->
             <div *dxTemplate="let data of 'dropDownButton'">

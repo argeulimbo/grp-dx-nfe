@@ -1,0 +1,34 @@
+<h1>Clientes</h1>
+<div class="content-block">
+  <!-- Container Pai & Abaixo do Título -->
+  <div class="dx-card responsive-paddings">
+
+    <!-- Criar Nota -->
+    <section class="cliente-add">
+      <dx-button
+        text="Adicionar Cliente"
+        icon="plus"
+        type="default"
+        stylingMode="contained"
+        routerLink="/nfe/clientes/criar"
+      ></dx-button>
+    </section>
+
+    <!-- Filtro Cliente -->
+    <section class="search">
+      <dx-text-box
+        class="inputSearch"
+        placeholder="Digite para buscar"
+        width="500"
+        valueChangeEvent="keyup"
+      ></dx-text-box>
+    </section>
+
+    <!-- Listagem de cliente -->
+    <section class="cliente-lista">
+      <dx-data-grid
+        [dataSource]="clientes"
+      ></dx-data-grid>
+    </section>
+  </div>
+</div>
