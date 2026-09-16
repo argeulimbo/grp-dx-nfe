@@ -12,6 +12,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import { ListaNotaFiscalComponent } from './pages/nota-fiscal/lista-nota-fiscal.component/lista-nota-fiscal.component';
 import { CriarNotaFiscalComponent } from './pages/nota-fiscal/criar-nota-fiscal/criar-nota-fiscal';
 import { ListaClienteComponent } from './pages/clientes/lista-cliente.component/lista-cliente.component';
+import { CriarCliente } from './pages/clientes/criar-cliente/criar-cliente';
 
 export const routes: Routes = [
   {
@@ -19,11 +20,11 @@ export const routes: Routes = [
     component: ListaClienteComponent,
     canActivate: [AuthGuardService],
   },
-  // {
-  //   path: 'nfe/clientes/criar',
-  //   component: CriarClienteComponent,
-  //   canActivate: [AuthGuardService]
-  // },
+  {
+    path: 'nfe/clientes/criar',
+    component: CriarCliente,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'nfe/notas',
     component: ListaNotaFiscalComponent,

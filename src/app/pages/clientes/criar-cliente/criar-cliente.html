@@ -1,0 +1,47 @@
+<h1>Criar Cliente</h1>
+
+<div class="content-block">
+
+  <div class="dx-card responsive-paddings">
+    <section>
+      <!-- BT Home -->
+      <dx-button
+        text="Voltar"
+        icon="arrowleft"
+        routerLink="/nfe/clientes">
+
+      </dx-button>
+
+      <!-- Imagem do Cliente -->
+      <div class="img-div">
+        <img src="/tecnico-create.svg" alt="cliente-image">
+      </div>
+
+      <!-- Formulário do Cliente -->
+      <dx-form [formData]="cliente">
+        <dxi-item itemType="group" caption="Dados Cliente" [colCount]="2">
+
+          <!-- Nome do cliente -->
+          <dxi-item dataField="nome" [isRequired]="true">
+            <dxo-label text="Nome do Cliente"></dxo-label>
+          </dxi-item>
+
+          <!-- Código do Cliente -->
+          <dxi-item dataField="codigo" [isRequired]="true">
+            <dxo-label text="Código"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+      </dx-form>
+
+      <br /><hr /><br />
+
+      <!-- BT Salvar / Cancelar -->
+      <div class="div-bt">
+        <dx-button text="Salvar" type="success" (onClick)="salvarCliente(cliente)"></dx-button>
+        <dx-button text="Cancelar" type="danger" routerLink="/nfe/clientes"></dx-button>
+      </div>
+
+    </section>
+  </div>
+
+</div>

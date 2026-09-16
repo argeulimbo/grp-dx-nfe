@@ -37,12 +37,6 @@ export class CriarNotaFiscalComponent implements OnInit {
     itens:            [] as ItemNotaGrid[]
   };
 
-  argeu: Cliente = {
-    id:    1,
-    codigo:  "A01",
-    nome:    "Argeu Phelipe"
-  }
-
   clientes: any[] = [];
   produtos: Produto[] = [];
 
