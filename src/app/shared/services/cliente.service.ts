@@ -9,8 +9,12 @@ import { Cliente } from '../../pages/documentos/documentos';
 
 export class ClienteService {
 
-  // Endpoint CLIENTES
+  /*
+  @Depreciado - Utilizar em caso de NÃO usar Proxy Conf
   private readonly API = 'http://localhost:8080/clientes';
+  */
+
+  private readonly API = '/api/clientes';
 
   constructor(
     private http: HttpClient

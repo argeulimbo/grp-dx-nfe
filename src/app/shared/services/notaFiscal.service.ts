@@ -4,16 +4,18 @@ import { Observable } from 'rxjs';
 import { NotaFiscal } from '../../pages/documentos/documentos';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotaFiscalService {
 
-  // Endpoint NOTAS
+  /*
+  @Depreciado - Utilizar em caso de NÃO usar Proxy Conf
   private readonly API = 'http://localhost:8080/notas';
+  */
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  private readonly API = '/api/notas';
+
+  constructor(private http: HttpClient) {}
 
   listar(): Observable<NotaFiscal[]> {
     return this.http.get<NotaFiscal[]>(this.API);
@@ -33,6 +35,4 @@ export class NotaFiscalService {
     this.http.delete(`${this.API}/${numero}`);
     alert('Nota Fiscal excluída com sucesso, número: ' + numero);
   }
-
-
 }
