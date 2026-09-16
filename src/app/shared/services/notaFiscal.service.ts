@@ -7,9 +7,8 @@ import { NotaFiscal } from '../../pages/documentos/documentos';
   providedIn: 'root',
 })
 export class NotaFiscalService {
-
   /*
-  @Depreciado - Utilizar em caso de NÃO usar Proxy Conf
+  @Depreciado - Usar somente se o CORS não barrar REQUEST
   private readonly API = 'http://localhost:8080/notas';
   */
 
@@ -22,25 +21,27 @@ export class NotaFiscalService {
   }
 
   // Não utilizado até o momento
-  buscarPorNumero(numero: number): Observable<NotaFiscal> {
+  // Numero da Nota
+  buscarPorNumero(numero: string): Observable<NotaFiscal> {
     return this.http.get<NotaFiscal>(`${this.API}/${numero}`);
   }
 
+  // POST method - Create
   criar(nota: NotaFiscal): Observable<NotaFiscal> {
     return this.http.post<NotaFiscal>(this.API, nota);
   }
 
+  // PUT method - Update
   salvar(nota: NotaFiscal): Observable<NotaFiscal> {
     return this.http.put<NotaFiscal>(
       `${this.API}/${nota.numero}`,
-      nota
-    );
+      nota);
   }
 
+  // DELETE method - Delete
   // Assinatura: mudar de void para Observable<void>
   // Corpo do método: adicionar return this.http...
   excluir(numero: number): void {
     this.http.delete(`${this.API}/${numero}`);
-    alert('Nota Fiscal excluída com sucesso, número: ' + numero);
   }
 }
