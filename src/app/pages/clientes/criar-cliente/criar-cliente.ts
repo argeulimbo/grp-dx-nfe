@@ -32,6 +32,5 @@ export class CriarCliente implements OnInit {
     this.clienteService.salvar(cliente).subscribe((cliente) => {
       this.cliente = cliente;
     });
-    alert('pnc das frangas');
   }
 }

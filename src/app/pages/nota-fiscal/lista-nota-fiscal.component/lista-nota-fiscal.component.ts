@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angular/core';
 
 import { DxButtonComponent,
          DxTextBoxComponent,
@@ -8,7 +8,7 @@ import { Cliente, NotaFiscal } from '../../documentos/documentos';
 
 import { RouterLink } from "@angular/router";
 import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
-import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
+import { DxiColumnComponent, DxiItemComponent } from 'devextreme-angular/ui/nested';
 
 @Component({
   imports: [
@@ -16,7 +16,7 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
     DxTextBoxComponent,
     DxDataGridComponent,
     RouterLink,
-    DxiColumnComponent,
+    DxiColumnComponent
   ],
   selector: 'app-lista-nota-fiscal.component',
   styleUrl: './lista-nota-fiscal.component.scss',
@@ -24,12 +24,6 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 })
 export class ListaNotaFiscalComponent implements OnInit {
   notas: NotaFiscal[] = [];
-
-  argeu: Cliente = {
-    id: 1,
-    codigo: 'A01',
-    nome: 'Argeu Phelipe',
-  };
 
   filtroPorTexto: string = '';
 

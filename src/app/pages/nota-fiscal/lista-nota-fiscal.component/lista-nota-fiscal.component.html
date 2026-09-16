@@ -33,7 +33,10 @@
 
         <dxi-column dataField="numero" caption="Número"></dxi-column>
         <dxi-column dataField="codigoCliente" caption="Cliente"></dxi-column>
-        <dxi-column dataField="dataEmissao" caption="Emissão"></dxi-column>
+        <dxi-column dataField="dataEmissao" caption="Emissão"
+                    editorType="dxDateBox"
+                    [editorOptions]="{ displayFormat: 'dd/MM/yyyy' }">
+        </dxi-column>
 
       </dx-data-grid>
     </section>
