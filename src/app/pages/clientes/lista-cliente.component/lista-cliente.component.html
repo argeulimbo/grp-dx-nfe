@@ -28,7 +28,13 @@
     <section class="cliente-lista">
       <dx-data-grid
         [dataSource]="clientes"
-      ></dx-data-grid>
+        keyExpr="codigo"
+        [showBorders]="true">
+
+        <dxi-column dataField="codigo" caption="Código"></dxi-column>
+        <dxi-column dataField="nome"  caption="Nome"></dxi-column>
+
+      </dx-data-grid>
     </section>
   </div>
 </div>

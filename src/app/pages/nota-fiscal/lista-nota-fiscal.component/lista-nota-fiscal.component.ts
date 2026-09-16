@@ -8,9 +8,16 @@ import { Cliente, NotaFiscal } from '../../documentos/documentos';
 
 import { RouterLink } from "@angular/router";
 import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
+import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 
 @Component({
-  imports: [DxButtonComponent, DxTextBoxComponent, DxDataGridComponent, RouterLink],
+  imports: [
+    DxButtonComponent,
+    DxTextBoxComponent,
+    DxDataGridComponent,
+    RouterLink,
+    DxiColumnComponent,
+  ],
   selector: 'app-lista-nota-fiscal.component',
   styleUrl: './lista-nota-fiscal.component.scss',
   templateUrl: './lista-nota-fiscal.component.html',
