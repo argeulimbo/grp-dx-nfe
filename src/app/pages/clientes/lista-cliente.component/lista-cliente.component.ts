@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent } from 'devextreme-angular';
 import { RouterLink } from '@angular/router';
+
+import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent } from 'devextreme-angular';
+
 
 @Component({
   imports: [
@@ -15,5 +17,12 @@ import { RouterLink } from '@angular/router';
 export class ListaClienteComponent {
 
   clientes: any[] = [];
+
+  constructor(
+    private http: HttpClient
+  ) {
+
+  }
+
 
 }
