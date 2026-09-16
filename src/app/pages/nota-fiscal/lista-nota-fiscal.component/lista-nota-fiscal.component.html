@@ -28,15 +28,22 @@
     <section class="nota-fiscal-lista">
       <dx-data-grid
       [dataSource]="notas"
-      keyExpr="codigo"
+      keyExpr="id"
       [showBorders]="false">
 
         <dxi-column dataField="numero" caption="Número"></dxi-column>
-        <dxi-column dataField="codigoCliente" caption="Cliente"></dxi-column>
+        <dxi-column dataField="codigoCliente" caption="Cliente"
+                    cellTemplate="clienteCellTemplate"></dxi-column>
         <dxi-column dataField="dataEmissao" caption="Emissão"
                     editorType="dxDateBox"
-                    [editorOptions]="{ displayFormat: 'dd/MM/yyyy' }">
+                    dataType="date"
+                    format="dd/MM/yyyy">
         </dxi-column>
+
+        <!-- Nome + Código -->
+        <div *dxTemplate="let cell of 'clienteCellTemplate'">
+          <span>{{ cell.data.cliente?.codigo }} - {{ cell.data.cliente?.nome }}</span>
+        </div>
 
       </dx-data-grid>
     </section>

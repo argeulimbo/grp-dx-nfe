@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angu
 
 import { DxButtonComponent,
          DxTextBoxComponent,
-         DxDataGridComponent
-        } from 'devextreme-angular';
+         DxDataGridComponent, DxTemplateDirective
+} from 'devextreme-angular';
 import { Cliente, NotaFiscal } from '../../documentos/documentos';
 
 import { RouterLink } from "@angular/router";
@@ -16,7 +16,8 @@ import { DxiColumnComponent, DxiItemComponent } from 'devextreme-angular/ui/nest
     DxTextBoxComponent,
     DxDataGridComponent,
     RouterLink,
-    DxiColumnComponent
+    DxiColumnComponent,
+    DxTemplateDirective,
   ],
   selector: 'app-lista-nota-fiscal.component',
   styleUrl: './lista-nota-fiscal.component.scss',
@@ -33,13 +34,18 @@ export class ListaNotaFiscalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.notaFiscalService.listar().subscribe((listaNotas) => {
-      this.notas = listaNotas;
-    });
+    this.listarNotas();
   }
 
   private removerAcentos(texto: string): string {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  listarNotas(): void {
+    this.notaFiscalService.listar().subscribe((listaNotas) => {
+      this.notas = listaNotas;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   filtrarPorTexto(): NotaFiscal[] {

@@ -28,12 +28,12 @@ export class ListaClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarClientes();
-    this.changeDetectorRef.detectChanges();
   }
 
   listarClientes(): void {
     this.clienteService.listar().subscribe((clientes) => {
       this.clientes = clientes;
+      this.changeDetectorRef.detectChanges();
     });
   }
 }
