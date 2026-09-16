@@ -8,7 +8,12 @@ import { Produto } from '../../pages/documentos/documentos';
 @Injectable( { providedIn: 'root' } )
 export class ProdutoService {
 
+  /*
+  @Depreciado - Utilizar em caso de NÃO usar Proxy Conf
   private readonly API = 'http://localhost:8000/produtos';
+  */
+
+  private readonly API = '/api/produtos';
 
   constructor(
     private http: HttpClient

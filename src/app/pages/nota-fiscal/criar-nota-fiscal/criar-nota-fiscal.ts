@@ -94,12 +94,17 @@ export class CriarNotaFiscalComponent implements OnInit {
     return Date.now() + offset;
   }
 
-  salvarNota(nota: NotaFiscal) {
-    this.notaFiscalService.salvar(nota).subscribe(nota => {
+  criarNota(nota: NotaFiscal) {
+    this.notaFiscalService.criar(nota).subscribe(nota => {
       this.nota = nota;
     });
     alert('CRUZEIRAO CABULOSO');
   }
 
+  salvarNota(nota: NotaFiscal) {
+    this.notaFiscalService.salvar(nota).subscribe(nota => {
+      this.nota = nota;
+    });
+  }
 
 }

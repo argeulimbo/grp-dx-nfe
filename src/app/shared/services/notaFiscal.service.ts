@@ -21,12 +21,20 @@ export class NotaFiscalService {
     return this.http.get<NotaFiscal[]>(this.API);
   }
 
+  // Não utilizado até o momento
   buscarPorNumero(numero: number): Observable<NotaFiscal> {
     return this.http.get<NotaFiscal>(`${this.API}/${numero}`);
   }
 
-  salvar(nota: NotaFiscal): Observable<NotaFiscal> {
+  criar(nota: NotaFiscal): Observable<NotaFiscal> {
     return this.http.post<NotaFiscal>(this.API, nota);
+  }
+
+  salvar(nota: NotaFiscal): Observable<NotaFiscal> {
+    return this.http.put<NotaFiscal>(
+      `${this.API}/${nota.numero}`,
+      nota
+    );
   }
 
   // Assinatura: mudar de void para Observable<void>
