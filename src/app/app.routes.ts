@@ -13,8 +13,20 @@ import { ListaNotaFiscalComponent } from './pages/nota-fiscal/lista-nota-fiscal.
 import { CriarNotaFiscalComponent } from './pages/nota-fiscal/criar-nota-fiscal/criar-nota-fiscal';
 import { ListaClienteComponent } from './pages/clientes/lista-cliente.component/lista-cliente.component';
 import { CriarCliente } from './pages/clientes/criar-cliente/criar-cliente';
+import { ListaProdutoComponent } from './pages/produtos/lista-produto.component/lista-produto.component';
+import { CriarProduto } from './pages/produtos/criar-produto/criar-produto';
 
 export const routes: Routes = [
+  {
+    path: 'nfe/produtos',
+    component: ListaProdutoComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'nfe/produtos/criar',
+    component: CriarProduto,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'nfe/clientes',
     component: ListaClienteComponent,

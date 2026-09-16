@@ -18,6 +18,7 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
   templateUrl: './lista-cliente.component.html',
 })
 export class ListaClienteComponent implements OnInit {
+
   clientes: any[] = [];
 
   constructor(

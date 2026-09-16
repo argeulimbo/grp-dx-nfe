@@ -1,1 +1,41 @@
-<p>lista-produto.component works!</p>
+<h1>Produtos</h1>
+<div class="content-block">
+  <!-- Container Pai & Abaixo do Título -->
+  <div class="dx-card responsive-paddings">
+
+    <!-- Criar Produto -->
+    <section class="produto-add">
+      <dx-button
+        text="Adicionar Produto"
+        icon="plus"
+        type="default"
+        stylingMode="contained"
+        routerLink="/nfe/produtos/criar"
+      ></dx-button>
+    </section>
+
+    <!-- Filtro Produto -->
+    <section class="search">
+      <dx-text-box
+        class="inputSearch"
+        placeholder="Digite para buscar"
+        width="500"
+        valueChangeEvent="keyup"
+      ></dx-text-box>
+    </section>
+
+    <!-- Listagem de produto -->
+    <section class="produto-lista">
+      <dx-data-grid
+        [dataSource]="produtos"
+        keyExpr="codigo"
+        [showBorders]="false">
+
+        <dxi-column dataField="codigo" caption="Código"></dxi-column>
+        <dxi-column dataField="descricao"  caption="Descrição"></dxi-column>
+        <dxi-column dataField="valorUnitario" caption="Valor Unitário"></dxi-column>
+
+      </dx-data-grid>
+    </section>
+  </div>
+</div>

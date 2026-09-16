@@ -30,6 +30,10 @@ export const navigation: NavigationItem[] = [
       {
         text: 'Clientes',
         path: '/nfe/clientes',
+      },
+      {
+        text: 'Produtos',
+        path: '/nfe/produtos'
       }
     ]
   }
