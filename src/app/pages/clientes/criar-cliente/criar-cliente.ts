@@ -13,6 +13,7 @@ import { ClienteService } from '../../../shared/services/cliente.service';
   templateUrl: './criar-cliente.html',
 })
 export class CriarCliente implements OnInit {
+
   cliente: any = {
     codigo: null,
     nome: null,
@@ -28,8 +29,8 @@ export class CriarCliente implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  salvarCliente(cliente: Cliente) {
-    this.clienteService.salvar(cliente).subscribe((cliente) => {
+  criarCliente(cliente: Cliente) {
+    this.clienteService.criar(cliente).subscribe((cliente) => {
       this.cliente = cliente;
     });
   }

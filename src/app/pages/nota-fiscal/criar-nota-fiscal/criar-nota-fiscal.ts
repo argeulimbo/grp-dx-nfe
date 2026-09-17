@@ -90,9 +90,10 @@ export class CriarNotaFiscalComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  private proximoCodigoProduto(offset: number): number {
-    return Date.now() + offset;
-  }
+  // @Depreciado - invenção de moda
+  // private proximoCodigoProduto(offset: number): number {
+  //   return Date.now() + offset;
+  // }
 
   criarNota(nota: NotaFiscal) {
     this.notaFiscalService.criar(nota).subscribe(nota => {

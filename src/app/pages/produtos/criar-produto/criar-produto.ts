@@ -1,9 +1,45 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
+import { DxiItemComponent, DxiValidationRuleComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
+import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ProdutoService } from '../../../shared/services/produto.service';
+import { Produto } from '../../documentos/documentos';
 
 @Component({
-  imports: [],
+  imports: [
+    DxButtonComponent,
+    DxFormComponent,
+    DxiItemComponent,
+    DxoLabelComponent,
+    RouterLink,
+    DxiValidationRuleComponent,
+  ],
   selector: 'app-criar-produto',
   styleUrl: './criar-produto.scss',
   templateUrl: './criar-produto.html',
 })
-export class CriarProduto {}
+export class CriarProduto implements OnInit {
+  produto: any = {
+    codigo: null,
+    descricao: null,
+    valorUnitario: null,
+  };
+
+  constructor(
+    private http: HttpClient,
+    private changeDetectorRef: ChangeDetectorRef,
+    private produtoService: ProdutoService,
+  ) {}
+
+  ngOnInit() {
+    this.changeDetectorRef.detectChanges();
+  }
+
+  criarProduto(produto: Produto) {
+    this.produtoService.criar(produto).subscribe((produto) => {
+      this.produto = produto;
+      alert('Produto ' + produto.descricao + ' criado!')
+    });
+  }
+}
