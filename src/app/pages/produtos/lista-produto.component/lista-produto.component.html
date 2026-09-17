@@ -35,6 +35,28 @@
         <dxi-column dataField="descricao"  caption="Descrição"></dxi-column>
         <dxi-column dataField="valorUnitario" caption="Valor Unitário"></dxi-column>
 
+        <!-- Ações -->
+        <dxi-column caption="Ações" cellTemplate="acoesTemplate" [width]="120" [allowSorting]="false"></dxi-column>
+        <div *dxTemplate="let cell of 'acoesTemplate'">
+          <!-- BT Edit -->
+          <dx-button
+            icon="edit"
+            type="default"
+            stylingMode="text"
+            hint="Editar"
+            (onClick)="editarProduto(cell.data.codigo)">
+          </dx-button>
+
+          <!-- BT Excluir -->
+          <dx-button
+            icon="trash"
+            type="default"
+            stylingMode="text"
+            hint="Excluir"
+            (onClick)="excluirProduto(cell.data.codigo)">
+          </dx-button>
+        </div>
+
       </dx-data-grid>
     </section>
   </div>
