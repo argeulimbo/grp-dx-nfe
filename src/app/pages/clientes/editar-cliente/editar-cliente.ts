@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EditarNotaFiscalComponent } from '../../nota-fiscal/editar-nota-fiscal/editar-nota-fiscal';
 
 @Component({
   imports: [],
@@ -6,4 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './editar-cliente.scss',
   templateUrl: './editar-cliente.html',
 })
-export class EditarCliente {}
+export class EditarClienteComponent {}

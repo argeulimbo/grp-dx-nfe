@@ -15,6 +15,8 @@ import { ListaClienteComponent } from './pages/clientes/lista-cliente.component/
 import { CriarCliente } from './pages/clientes/criar-cliente/criar-cliente';
 import { ListaProdutoComponent } from './pages/produtos/lista-produto.component/lista-produto.component';
 import { CriarProduto } from './pages/produtos/criar-produto/criar-produto';
+import { EditarProdutoComponent } from './pages/produtos/editar-produto/editar-produto';
+import { EditarClienteComponent } from './pages/clientes/editar-cliente/editar-cliente';
 
 export const routes: Routes = [
   {
@@ -28,6 +30,11 @@ export const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'nfe/produtos/edit/:codigo',
+    component: EditarProdutoComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'nfe/clientes',
     component: ListaClienteComponent,
     canActivate: [AuthGuardService],
@@ -38,6 +45,11 @@ export const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'nfe/clientes/edit/:codigo',
+    component: EditarClienteComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'nfe/notas',
     component: ListaNotaFiscalComponent,
     canActivate: [AuthGuardService]
@@ -45,6 +57,11 @@ export const routes: Routes = [
   {
     path: 'nfe/notas/criar',
     component: CriarNotaFiscalComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'nfe/notas/edit/:codigo',
+    component: EditarClienteComponent,
     canActivate: [AuthGuardService]
   },
   {

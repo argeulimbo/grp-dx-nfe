@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './editar-produto.scss',
   templateUrl: './editar-produto.html',
 })
-export class EditarProduto {}
+export class EditarProdutoComponent {
+
+}

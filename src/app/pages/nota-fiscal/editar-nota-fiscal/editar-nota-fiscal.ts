@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './editar-nota-fiscal.scss',
   templateUrl: './editar-nota-fiscal.html',
 })
-export class EditarNotaFiscal {}
+export class EditarNotaFiscalComponent {
+
+}
