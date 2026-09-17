@@ -4,7 +4,6 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ProdutoService } from '../../../shared/services/produto.service';
-import { Produto } from '../../documentos/documentos';
 
 @Component({
   imports: [

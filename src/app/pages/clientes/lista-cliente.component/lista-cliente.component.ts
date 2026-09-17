@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent } from 'devextreme-angular';
-import { RouterLink } from '@angular/router';
+import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent, DxTemplateDirective } from 'devextreme-angular';
+import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
@@ -12,6 +12,7 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
     DxTextBoxComponent,
     RouterLink,
     DxiColumnComponent,
+    DxTemplateDirective
   ],
   selector: 'app-lista-cliente.component',
   styleUrl: './lista-cliente.component.scss',
@@ -25,6 +26,7 @@ export class ListaClienteComponent implements OnInit {
     private http: HttpClient,
     private changeDetectorRef: ChangeDetectorRef,
     private clienteService: ClienteService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,4 +39,14 @@ export class ListaClienteComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
     });
   }
+
+  editarCliente(codigo: string): void {
+    this.router.navigate(['/nfe/clientes', codigo]);
+  }
+
+  excluirCliente(codigo: string): void {
+    this.clienteService.excluir(codigo);
+    alert('Cliente excluído! ' + codigo);
+  }
+
 }

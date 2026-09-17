@@ -62,7 +62,8 @@ export class ListaNotaFiscalComponent implements OnInit {
     this.router.navigate(['/nfe/notas', codigo]);
   }
 
-  excluirNota(codigo: string) {
-    return null;
+  excluirNota(numero: string) {
+    this.notaFiscalService.excluir(numero);
+    alert('Nota Fiscal Nº - ' + numero + ' excluída!');
   }
 }

@@ -34,6 +34,28 @@
         <dxi-column dataField="codigo" caption="Código"></dxi-column>
         <dxi-column dataField="nome"  caption="Nome"></dxi-column>
 
+        <!-- Ações -->
+        <dxi-column caption="Ações" cellTemplate="acoesTemplate" [width]="120" [allowSorting]="false"></dxi-column>
+        <div *dxTemplate="let cell of 'acoesTemplate'">
+          <!-- BT Edit -->
+          <dx-button
+            icon="edit"
+            type="default"
+            stylingMode="text"
+            hint="Editar"
+            (onClick)="editarCliente(cell.data.codigo)">
+          </dx-button>
+
+          <!-- BT Excluir -->
+          <dx-button
+            icon="trash"
+            type="default"
+            stylingMode="text"
+            hint="Excluir"
+            (onClick)="excluirCliente(cell.data.codigo)">
+          </dx-button>
+        </div>
+
       </dx-data-grid>
     </section>
   </div>

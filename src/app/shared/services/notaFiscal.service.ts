@@ -41,7 +41,7 @@ export class NotaFiscalService {
   // DELETE method - Delete
   // Assinatura: mudar de void para Observable<void>
   // Corpo do método: adicionar return this.http...
-  excluir(numero: number): void {
+  excluir(numero: string): void {
     this.http.delete(`${this.API}/${numero}`);
   }
 }
