@@ -43,7 +43,7 @@
             type="default"
             stylingMode="text"
             hint="Editar"
-            (onClick)="editarCliente(cell.data.codigo)">
+            [routerLink]="['/nfe/clientes', codigo]">
           </dx-button>
 
           <!-- BT Excluir -->

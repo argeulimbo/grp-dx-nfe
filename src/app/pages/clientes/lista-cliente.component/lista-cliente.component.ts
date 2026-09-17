@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent, DxTemplateDirective } from 'devextreme-angular';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +21,7 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 export class ListaClienteComponent implements OnInit {
 
   clientes: any[] = [];
+  @Input() codigo?: string;
 
   constructor(
     private http: HttpClient,
@@ -38,10 +39,6 @@ export class ListaClienteComponent implements OnInit {
       this.clientes = clientes;
       this.changeDetectorRef.detectChanges();
     });
-  }
-
-  editarCliente(codigo: string): void {
-    this.router.navigate(['/nfe/clientes', codigo]);
   }
 
   excluirCliente(codigo: string): void {
