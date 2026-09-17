@@ -54,7 +54,7 @@
             type="default"
             stylingMode="text"
             hint="Editar"
-            (onClick)="editarNota(cell.data.numero)">
+            [routerLink]="['/nfe/notas/edit', cell.data.numero]">
           </dx-button>
 
           <!-- BT Excluir -->

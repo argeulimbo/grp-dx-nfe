@@ -17,6 +17,7 @@ import { ListaProdutoComponent } from './pages/produtos/lista-produto.component/
 import { CriarProduto } from './pages/produtos/criar-produto/criar-produto';
 import { EditarProdutoComponent } from './pages/produtos/editar-produto/editar-produto';
 import { EditarClienteComponent } from './pages/clientes/editar-cliente/editar-cliente';
+import { EditarNotaFiscalComponent } from './pages/nota-fiscal/editar-nota-fiscal/editar-nota-fiscal';
 
 export const routes: Routes = [
   {
@@ -60,8 +61,8 @@ export const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'nfe/notas/edit/:codigo',
-    component: EditarClienteComponent,
+    path: 'nfe/notas/edit/:numero',
+    component: EditarNotaFiscalComponent,
     canActivate: [AuthGuardService]
   },
   {

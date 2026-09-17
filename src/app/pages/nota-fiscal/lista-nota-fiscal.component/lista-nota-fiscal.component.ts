@@ -4,11 +4,11 @@ import { DxButtonComponent,
          DxTextBoxComponent,
          DxDataGridComponent, DxTemplateDirective
 } from 'devextreme-angular';
-import { Cliente, NotaFiscal } from '../../documentos/documentos';
+import { NotaFiscal } from '../../documentos/documentos';
 
 import { Router, RouterLink } from '@angular/router';
 import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
-import { DxiColumnComponent, DxiItemComponent } from 'devextreme-angular/ui/nested';
+import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 
 @Component({
   imports: [
@@ -26,8 +26,6 @@ import { DxiColumnComponent, DxiItemComponent } from 'devextreme-angular/ui/nest
 export class ListaNotaFiscalComponent implements OnInit {
   notas: NotaFiscal[] = [];
 
-  filtroPorTexto: string = '';
-
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private notaFiscalService: NotaFiscalService,
@@ -38,28 +36,11 @@ export class ListaNotaFiscalComponent implements OnInit {
     this.listarNotas();
   }
 
-  filtrarPorTexto(): NotaFiscal[] {
-    if (!this.filtroPorTexto) {
-      return this.notas;
-    }
-    return this.notas.filter((nota) => {
-      return nota.numero?.toLowerCase().includes(this.filtroPorTexto.toLowerCase());
-    });
-  }
-
-  private removerAcentos(texto: string): string {
-    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
-
   listarNotas(): void {
     this.notaFiscalService.listar().subscribe((listaNotas) => {
       this.notas = listaNotas;
       this.changeDetectorRef.detectChanges();
     });
-  }
-
-  editarNota(codigo: string): void {
-    this.router.navigate(['/nfe/notas', codigo]);
   }
 
   excluirNota(numero: string) {

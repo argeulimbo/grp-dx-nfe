@@ -44,7 +44,7 @@
             type="default"
             stylingMode="text"
             hint="Editar"
-            (onClick)="editarProduto(cell.data.codigo)">
+            [routerLink]="['/nfe/produtos/edit', cell.data.codigo]">
           </dx-button>
 
           <!-- BT Excluir -->
