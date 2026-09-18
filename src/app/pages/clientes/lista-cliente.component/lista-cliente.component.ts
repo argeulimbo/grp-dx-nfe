@@ -42,8 +42,11 @@ export class ListaClienteComponent implements OnInit {
   }
 
   excluirCliente(codigo: string): void {
-    this.clienteService.excluir(codigo);
-    alert('Cliente excluído! ' + codigo);
+    if (confirm('Deseja excluir este cliente?')) {
+      this.clienteService.excluir(codigo).subscribe( () => {
+        this.listarClientes();
+      })
+    }
   }
 
 }
