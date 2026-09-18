@@ -33,9 +33,17 @@ export class ClienteService {
     alert('Cliente ' + cliente.nome + ' criado com sucesso!');
   }
 
+  /* @Depreciado
   editarCliente(cliente: Cliente): Observable<Cliente> {
     const url = `${this.API}/${cliente.codigo}`;
     return this.http.put<Cliente>(url, cliente);
+  }
+  */
+
+  // Editar Atualizado para lidar com response em text do BackEnd
+  editarCliente(cliente: Cliente): Observable<string> {
+    const url = `${this.API}/${cliente.codigo}`;
+    return this.http.put(url, cliente, { responseType: 'text' });
   }
 
   // Assinatura: mudar de void para Observable<void>

@@ -1,1 +1,121 @@
-<p>editar-nota-fiscal works!</p>
+<h1>Editar Nota Fiscal</h1>
+
+<div class="content-block">
+
+  <div class="dx-card responsive-paddings">
+    <section>
+      <!-- BT Home -->
+      <dx-button
+        text="Voltar"
+        icon="arrowleft"
+        routerLink="/nfe/notas">
+
+      </dx-button>
+
+      <!-- Imagem da Nota -->
+      <div class="img-div">
+        <img src="/nf.png" alt="nota-image">
+      </div>
+
+      <!-- Formulário da Nota Fiscal -->
+      <dx-form [formData]="nota">
+        <dxi-item itemType="group" caption="Dados Nota Fiscal" [colCount]="2">
+
+          <!-- Número da Nota -->
+          <dxi-item dataField="numero" [isRequired]="true">
+            <dxo-label text="Número da Nota"></dxo-label>
+          </dxi-item>
+
+          <!-- Cliente com Seleção e Busca -->
+          <dxi-item [isRequired]="true" template="clienteSelectTemplate">
+            <dxo-label text="Cliente"></dxo-label>
+          </dxi-item>
+
+          <!-- Data de Emissão -->
+          <dxi-item dataField="dataEmissao" editorType="dxDateBox" [isRequired]="true" [editorOptions]="{ displayFormat: 'dd/MM/yyyy' }">
+            <dxo-label text="Data de Emissão"></dxo-label>
+          </dxi-item>
+
+          <!-- Valor Total -->
+          <dxi-item dataField="valorTotal" editorType="dxNumberBox" [editorOptions]="{ readOnly: true, format: 'R$ #,##0.00' }">
+            <dxo-label text="Valor Total"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+        <!-- SelectBox de Cliente -->
+        <div *dxTemplate="let data of 'clienteSelectTemplate'">
+          <dx-select-box class="clientes-select-box"
+                         [dataSource]="clientes"
+                         displayExpr="nome"
+                         valueExpr="id"
+                         [(value)]="nota.codigoCliente"
+                         [searchEnabled]="true"
+                         searchMode="contains"
+                         placeholder="Digite para buscar o cliente..."
+                         noDataText="Nenhum cliente encontrado"
+
+          >
+
+            <!-- Ícone do campo -->
+            <div *dxTemplate="let data of 'dropDownButton'">
+              <i class="dx-icon-user"></i>
+            </div>
+
+            <!-- Botão no Rodapé do Dropdown -->
+            <dxo-drop-down-options>
+              <dxi-toolbar-item
+                widget="dxButton"
+                location="after"
+                [options]="">
+              </dxi-toolbar-item>
+            </dxo-drop-down-options>
+          </dx-select-box>
+        </div>
+      </dx-form>
+
+      <br /><hr /><br />
+
+      <!-- Tabela de Itens (Fora do Form) -->
+      <h3>Itens</h3>
+
+      <dx-data-grid
+        [dataSource]="nota.itens"
+        [showBorders]="true"
+        (onRowInserted)="atualizarValorTotal()"
+        (onRowUpdated)="atualizarValorTotal()"
+        (onRowRemoved)="atualizarValorTotal()">
+
+        <dxo-editing
+          mode="cell"
+          [allowAdding]="true"
+          [allowUpdating]="true"
+          [allowDeleting]="true">
+        </dxo-editing>
+
+        <!-- Select Produto -->
+        <dxi-column dataField="produtoCodigo" caption="Produto">
+          <dxo-lookup [dataSource]="produtos" displayExpr="descricao" valueExpr="id" searchMode="contains"></dxo-lookup>
+        </dxi-column>
+
+        <!-- Valor Unitário -->
+        <dxi-column dataField="valorUnitario" caption="Vlr. Unit">
+        </dxi-column>
+
+        <!-- Quantidade -->
+        <dxi-column dataField="quantidade" caption="Quantidade" dataType="number">
+        </dxi-column>
+
+      </dx-data-grid>
+
+      <br />
+
+      <!-- BT Salvar / Cancelar -->
+      <div class="div-bt">
+        <dx-button text="Salvar" type="success" (onClick)="editarNota(nota)"></dx-button>
+        <dx-button text="Cancelar" type="danger" routerLink="/nfe/notas"></dx-button>
+      </div>
+
+    </section>
+  </div>
+</div>

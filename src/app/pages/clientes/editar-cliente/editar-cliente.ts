@@ -31,8 +31,18 @@ export class EditarClienteComponent implements OnInit {
     if (codigo) {
       this.clienteService.buscarPorCodigo(codigo).subscribe((cliente) => {
         this.cliente = cliente;
-        (this.changeDetectorRef.detectChanges());
+        this.changeDetectorRef.detectChanges();
       });
+    }
+  }
+
+  carregarCliente() {
+    const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
+    if (codigo) {
+      this.clienteService.buscarPorCodigo(codigo).subscribe((cliente) => {
+        this.cliente = cliente;
+        (this.changeDetectorRef.detectChanges());
+      })
     }
   }
 
@@ -43,11 +53,4 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-
-  excluirCliente(): void {
-    this.clienteService.excluir(this.cliente.codigo!).subscribe(() => {
-      alert('Cliente '+ this.cliente.codigo + ' excluído com sucesso');
-      this.router.navigate(['/nfe/clientes']);
-    })
-  }
 }
