@@ -19,7 +19,6 @@ export class EditarClienteComponent implements OnInit {
   };
 
   constructor(
-    private http: HttpClient,
     private changeDetectorRef: ChangeDetectorRef,
     private clienteService: ClienteService,
     private router: Router,
