@@ -62,14 +62,39 @@ export class EditarNotaFiscalComponent implements OnInit {
     this.getNumeroNotaURL();
   }
 
-  // Metodo extraído para buscar nota pelo numero e atribuir
-  private getNumeroNotaURL() {
+  // Método que busca a nota pela URL
+  private getNumeroNotaURL(): void {
     const numeroNota = this.activatedRoute.snapshot.paramMap.get('numero');
+
     if (numeroNota) {
-      this.notaFiscalService.buscarPorNumero(numeroNota).subscribe((notaFiscal) => {
-        this.nota = notaFiscal;
-      })
+      this.notaFiscalService.buscarPorNumero(numeroNota).subscribe({
+        next: (notaFiscal: NotaFiscal) => {
+          this.nota = notaFiscal;
+          console.log('Nota carregada com sucesso:', this.nota);
+
+          // Passo 1.1: Agora que temos a nota, temos o codigo do cliente. Vamos buscá-lo!
+          if (this.nota.codigoCliente) {
+            this.carregarCliente(this.nota.codigoCliente);
+          }
+        },
+        error: (erro) => {
+          console.error('Erro ao buscar a Nota Fiscal:', erro);
+          // Aqui depois você pode colocar um alert ou toast para o usuário
+        },
+      });
     }
+  }
+
+  private carregarCliente(codigoCliente: string): void {
+    this.clienteService.buscarPorCodigo(codigoCliente).subscribe({
+      next: (clienteRetornado: Cliente) => {
+        this.clientes = [clienteRetornado];
+        console.log('Cliente carregado com sucesso:', clienteRetornado);
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar o Cliente:', erro);
+      },
+    });
   }
 
   clientes: any = [];
