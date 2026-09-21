@@ -1,16 +1,30 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {DxButtonComponent, DxDataGridComponent, DxFormComponent, DxSelectBoxComponent, DxTemplateDirective} from "devextreme-angular";
-import {DxiColumnComponent, DxiItemComponent, DxoDropDownOptionsComponent, DxoEditingComponent, DxoLabelComponent,
-    DxoLookupComponent
-} from "devextreme-angular/ui/nested";
-import {DxiToolbarItemComponent} from "devextreme-angular/ui/toolbar";
-import { ActivatedRoute, RouterLink} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {
+  DxButtonComponent,
+  DxDataGridComponent,
+  DxFormComponent,
+  DxSelectBoxComponent,
+  DxTemplateDirective,
+} from 'devextreme-angular';
+import {
+  DxiColumnComponent,
+  DxiItemComponent,
+  DxoDropDownOptionsComponent,
+  DxoEditingComponent,
+  DxoLabelComponent,
+  DxoLookupComponent,
+} from 'devextreme-angular/ui/nested';
+import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { ProdutoService } from '../../../shared/services/produto.service';
-import { Cliente, NotaFiscal, Produto } from '../../documentos/documentos';
+import { NotaFiscal } from '../../documentos/documentos';
 
 @Component({
+  selector: 'app-editar-nota-fiscal',
+  templateUrl: './editar-nota-fiscal.html',
+  styleUrl: './editar-nota-fiscal.scss',
   imports: [
     DxButtonComponent,
     DxDataGridComponent,
@@ -19,112 +33,52 @@ import { Cliente, NotaFiscal, Produto } from '../../documentos/documentos';
     DxTemplateDirective,
     DxiColumnComponent,
     DxiItemComponent,
-    DxiToolbarItemComponent,
-    DxoDropDownOptionsComponent,
     DxoEditingComponent,
     DxoLabelComponent,
     DxoLookupComponent,
     RouterLink,
   ],
-  selector: 'app-editar-nota-fiscal',
-  styleUrl: './editar-nota-fiscal.scss',
-  templateUrl: './editar-nota-fiscal.html',
 })
 export class EditarNotaFiscalComponent implements OnInit {
   nota: NotaFiscal = {
     numero: '',
-    cliente: undefined,
+    cliente: {
+      id: 0,
+      codigo: '',
+      nome: '',
+    },
     dataEmissao: new Date(),
     itens: [],
   };
 
-  cliente: Cliente = {
-    codigo: '',
-    nome: '',
-  };
-
-  produto: Produto = {
-    codigo: '',
-    descricao: '',
-    valorUnitario: 0,
-  };
+  clientes: any[] = [];
+  produtos: any[] = [];
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private notaFiscalService: NotaFiscalService,
     private clienteService: ClienteService,
     private produtoService: ProdutoService,
   ) {}
 
-  clientes: any = [];
-  produtos: any = [];
-
-  ngOnInit() {
-    /*
-    Leitura: Nota / Cliente / Produtos
-     */
-    this.getAllClientes();
-
+  ngOnInit(): void {
+    this.carregarListas();
     this.getNumeroNotaURL();
   }
 
-  // Metodo que busca a nota pela URL
-  private getNumeroNotaURL(): void {
-    const numeroNota = this.activatedRoute.snapshot.paramMap.get('numero');
+  private carregarListas(): void {
+    this.clienteService.listar().subscribe((res) => (this.clientes = res));
+    this.produtoService.listar().subscribe((res) => (this.produtos = res));
+  }
 
-    if (numeroNota) {
-      this.notaFiscalService.buscarPorNumero(numeroNota).subscribe({
-        next: (notaFiscal: any) => {
-          this.nota = notaFiscal;
-          console.log('Nota carregada com sucesso:', this.nota);
-          if (this.nota.cliente) {
-            this.clientes = [this.nota.cliente];
-          }
-          if (this.nota.itens && this.nota.itens.length > 0) {
-            this.getProdutosItens();
-          }
-        },
-        error: (erro) => {
-          console.error('Erro ao buscar a Nota Fiscal:', erro);
-        },
-      });
+  private getNumeroNotaURL(): void {
+    const numero = this.activatedRoute.snapshot.paramMap.get('numero');
+    if (numero) {
+      this.notaFiscalService.buscarPorNumero(numero).subscribe((res) => (this.nota = res));
     }
   }
 
-  private carregarCliente(codigoCliente: string): void {
-    this.clienteService.buscarPorCodigo(codigoCliente).subscribe({
-      next: (clienteRetornado: Cliente) => {
-        this.clientes = [clienteRetornado];
-        console.log('Cliente carregado com sucesso:', clienteRetornado);
-      },
-      error: (erro) => {
-        console.error('Erro ao buscar o Cliente:', erro);
-      },
-    });
-  }
+  atualizarValorTotal(): void {}
 
-  private getAllClientes(): void {
-    this.clienteService.listar().subscribe( (clientes) => {
-      this.clientes = clientes;
-    });
-  }
-
-  private getAllProdutos(): void {
-    this.produtoService.listar().subscribe( (produtos) => {
-      this.produtos = produtos;
-    });
-  }
-
-  private getProdutosItens() {
-    this.produtos = this.nota.itens?.map((item: any) => item.produto);
-  }
-
-  atualizarValorTotal() {
-    return null;
-  }
-
-  editarNota(nota: any) {
-    return null;
-  }
+  editarNota(nota: any): void {}
 }
