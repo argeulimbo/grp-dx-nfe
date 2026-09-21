@@ -1,1 +1,62 @@
-<p>editar-produto works!</p>
+<h1>Criar Produto</h1>
+
+<div class="content-block">
+
+  <div class="dx-card responsive-paddings">
+    <section>
+      <!-- BT Home -->
+      <dx-button
+        text="Voltar"
+        icon="arrowleft"
+        routerLink="/nfe/produtos">
+
+      </dx-button>
+
+      <!-- Imagem do Produto -->
+      <div class="img-div">
+        <img src="/produto-create.png" alt="produto-image">
+      </div>
+
+      <!-- Formulário do Produto -->
+      <dx-form [formData]="produto">
+        <dxi-item itemType="group" caption="Dados Produto" [colCount]="2">
+
+          <dxi-item dataField="codigo"
+                    [isRequired]="true">
+            <dxo-label text="Código"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item dataField="descricao"
+                  [isRequired]="true">
+          <dxo-label text="Descricao"></dxo-label>
+        </dxi-item>
+
+        <!-- Formatar campo Valor Unitario -->
+        <dxi-item dataField="valorUnitario"
+                  [isRequired]="true"
+                  editorType="dxNumberBox"
+                  [editorOptions]="{
+                    min: 0,
+                    format: 'R$ #.##0,0'
+                  }">
+          <dxo-label text="Valor Unitário"></dxo-label>
+          <dxi-validation-rule
+            type="required"
+            message="O valor unitário é obrigatório">
+          </dxi-validation-rule>
+        </dxi-item>
+      </dx-form>
+
+      <br /><hr /><br />
+
+      <!-- BT Salvar / Cancelar -->
+      <div class="div-bt">
+        <dx-button text="Salvar" type="success" (onClick)="editarProduto(produto)" routerLink="/nfe/produtos"></dx-button>
+        <dx-button text="Cancelar" type="danger" routerLink="/nfe/produtos"></dx-button>
+      </div>
+
+    </section>
+  </div>
+
+</div>

@@ -10,12 +10,10 @@ import {
 import {
   DxiColumnComponent,
   DxiItemComponent,
-  DxoDropDownOptionsComponent,
   DxoEditingComponent,
   DxoLabelComponent,
   DxoLookupComponent,
 } from 'devextreme-angular/ui/nested';
-import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { ProdutoService } from '../../../shared/services/produto.service';
@@ -78,7 +76,8 @@ export class EditarNotaFiscalComponent implements OnInit {
     }
   }
 
-  atualizarValorTotal(): void {}
+  atualizarValorTotal(): void {
+  }
 
   editarNota(nota: any): void {}
 }
