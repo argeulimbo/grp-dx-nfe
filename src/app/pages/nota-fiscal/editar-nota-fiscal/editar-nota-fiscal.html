@@ -48,8 +48,7 @@
           <dx-select-box class="clientes-select-box"
                          [dataSource]="clientes"
                          displayExpr="nome"
-                         valueExpr="id"
-                         [(value)]="nota.codigoCliente"
+                         [(value)]="nota.cliente"
                          [searchEnabled]="true"
                          searchMode="contains"
                          placeholder="Digite para buscar o cliente..."
@@ -57,12 +56,12 @@
 
           >
 
-            <!-- Ícone do campo -->
+            <!-- Icon do campo -->
             <div *dxTemplate="let data of 'dropDownButton'">
               <i class="dx-icon-user"></i>
             </div>
 
-            <!-- Botão no Rodapé do Dropdown -->
+            <!-- BT Rodape do Dropdown -->
             <dxo-drop-down-options>
               <dxi-toolbar-item
                 widget="dxButton"

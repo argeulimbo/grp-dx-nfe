@@ -33,13 +33,6 @@ export class ClienteService {
     alert('Cliente ' + cliente.nome + ' criado com sucesso!');
   }
 
-  /* @Depreciado
-  editarCliente(cliente: Cliente): Observable<Cliente> {
-    const url = `${this.API}/${cliente.codigo}`;
-    return this.http.put<Cliente>(url, cliente);
-  }
-  */
-
   // Editar Atualizado para lidar com response em text do BackEnd
   editarCliente(cliente: Cliente): Observable<string> {
     const url = `${this.API}/${cliente.codigo}`;
@@ -47,7 +40,7 @@ export class ClienteService {
   }
 
   // Assinatura: mudar de void para Observable<void>
-  // Corpo do método: adicionar return this.http...
+  // Corpo do metodo: adicionar return this.http...
   excluir(codigo: string): Observable<void> {
     const url = `${this.API}/${codigo}`;
     return this.http.delete<void>(url);

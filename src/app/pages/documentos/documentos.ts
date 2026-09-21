@@ -6,7 +6,7 @@ export interface ItemNotaFiscalRequest {
 export interface NotaFiscal {
   id?:                number;
   numero?:            string;
-  codigoCliente?:     string;
+  cliente?:     Cliente;
   dataEmissao:          Date;
   itens?: ItemNotaFiscalRequest[];
 }

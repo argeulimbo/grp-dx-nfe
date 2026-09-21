@@ -33,7 +33,7 @@ import { Cliente, NotaFiscal, Produto } from '../../documentos/documentos';
 export class EditarNotaFiscalComponent implements OnInit {
   nota: NotaFiscal = {
     numero: '',
-    codigoCliente: '',
+    cliente: undefined,
     dataEmissao: new Date(),
     itens: [],
   };
@@ -57,29 +57,36 @@ export class EditarNotaFiscalComponent implements OnInit {
     private produtoService: ProdutoService,
   ) {}
 
+  clientes: any = [];
+  produtos: any = [];
+
   ngOnInit() {
-    // Lê a nota
+    /*
+    Leitura: Nota / Cliente / Produtos
+     */
+    this.getAllClientes();
+
     this.getNumeroNotaURL();
   }
 
-  // Método que busca a nota pela URL
+  // Metodo que busca a nota pela URL
   private getNumeroNotaURL(): void {
     const numeroNota = this.activatedRoute.snapshot.paramMap.get('numero');
 
     if (numeroNota) {
       this.notaFiscalService.buscarPorNumero(numeroNota).subscribe({
-        next: (notaFiscal: NotaFiscal) => {
+        next: (notaFiscal: any) => {
           this.nota = notaFiscal;
           console.log('Nota carregada com sucesso:', this.nota);
-
-          // Passo 1.1: Agora que temos a nota, temos o codigo do cliente. Vamos buscá-lo!
-          if (this.nota.codigoCliente) {
-            this.carregarCliente(this.nota.codigoCliente);
+          if (this.nota.cliente) {
+            this.clientes = [this.nota.cliente];
+          }
+          if (this.nota.itens && this.nota.itens.length > 0) {
+            this.getProdutosItens();
           }
         },
         error: (erro) => {
           console.error('Erro ao buscar a Nota Fiscal:', erro);
-          // Aqui depois você pode colocar um alert ou toast para o usuário
         },
       });
     }
@@ -97,8 +104,21 @@ export class EditarNotaFiscalComponent implements OnInit {
     });
   }
 
-  clientes: any = [];
-  produtos: any = [];
+  private getAllClientes(): void {
+    this.clienteService.listar().subscribe( (clientes) => {
+      this.clientes = clientes;
+    });
+  }
+
+  private getAllProdutos(): void {
+    this.produtoService.listar().subscribe( (produtos) => {
+      this.produtos = produtos;
+    });
+  }
+
+  private getProdutosItens() {
+    this.produtos = this.nota.itens?.map((item: any) => item.produto);
+  }
 
   atualizarValorTotal() {
     return null;
