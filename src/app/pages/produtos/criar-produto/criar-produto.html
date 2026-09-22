@@ -38,7 +38,7 @@
                   editorType="dxNumberBox"
                   [editorOptions]="{
                     min: 0,
-                    format: 'R$ #.##0,00'
+                    format: 'R$ #.##0,0'
                   }">
           <dxo-label text="Valor Unitário"></dxo-label>
           <dxi-validation-rule
@@ -52,7 +52,7 @@
 
       <!-- BT Salvar / Cancelar -->
       <div class="div-bt">
-        <dx-button text="Salvar" type="success" (onClick)="criarProduto(produto)" routerLink="/nfe/produtos"></dx-button>
+        <dx-button text="Salvar" type="success" (onClick)="criarProduto(produto)"></dx-button>
         <dx-button text="Cancelar" type="danger" routerLink="/nfe/produtos"></dx-button>
       </div>
 
