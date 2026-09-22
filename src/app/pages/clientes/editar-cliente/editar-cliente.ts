@@ -3,7 +3,6 @@ import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
 import { DxiItemComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Cliente } from '../../documentos/documentos';
-import { HttpClient } from '@angular/common/http';
 import { ClienteService } from '../../../shared/services/cliente.service';
 
 @Component({
@@ -26,13 +25,7 @@ export class EditarClienteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
-    if (codigo) {
-      this.clienteService.buscarPorCodigo(codigo).subscribe((cliente) => {
-        this.cliente = cliente;
-        this.changeDetectorRef.detectChanges();
-      });
-    }
+    this.carregarCliente();
   }
 
   carregarCliente() {
