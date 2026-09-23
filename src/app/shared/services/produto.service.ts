@@ -19,8 +19,8 @@ export class ProdutoService {
     return this.http.get<Produto[]>(this.API);
   }
 
-  criar(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(this.API, produto);
+  criar(produto: Produto): Observable<string> {
+    return this.http.post(this.API, produto, { responseType: 'text' });
   }
 
   editarProduto(produto: Produto): Observable<string> {

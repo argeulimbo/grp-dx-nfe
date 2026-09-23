@@ -20,27 +20,20 @@ export class NotaFiscalService {
     return this.http.get<NotaFiscal[]>(this.API);
   }
 
-  // Não utilizado até o momento
-  // Numero da Nota
   buscarPorNumero(numero: string): Observable<NotaFiscal> {
     return this.http.get<NotaFiscal>(`${this.API}/${numero}`);
   }
 
-  // POST method - Create
-  criar(nota: NotaFiscal): Observable<NotaFiscal> {
-    return this.http.post<NotaFiscal>(this.API, nota);
+  criar(nota: NotaFiscal): Observable<string> {
+    return this.http.post(this.API, nota, { responseType: 'text' });
   }
 
-  // PUT method - Update
   salvar(nota: NotaFiscal): Observable<NotaFiscal> {
     return this.http.put<NotaFiscal>(
       `${this.API}/${nota.numero}`,
       nota);
   }
 
-  // DELETE method - Delete
-  // Assinatura: mudar de void para Observable<void>
-  // Corpo do método: adicionar return this.http...
   excluir(numero: string): void {
     this.http.delete(`${this.API}/${numero}`);
   }

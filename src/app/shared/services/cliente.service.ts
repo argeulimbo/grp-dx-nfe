@@ -16,7 +16,7 @@ export class ClienteService {
   private readonly API = '/api/clientes';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   listar(): Observable<Cliente[]> {
@@ -28,21 +28,17 @@ export class ClienteService {
     return this.http.get<Cliente>(url);
   }
 
-  criar(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(this.API, cliente);
-    alert('Cliente ' + cliente.nome + ' criado com sucesso!');
+  criar(cliente: Cliente): Observable<string> {
+    return this.http.post(this.API, cliente, { responseType: 'text'});
   }
 
-  // Editar Atualizado para lidar com response em text do BackEnd
   editarCliente(cliente: Cliente): Observable<string> {
     const url = `${this.API}/${cliente.codigo}`;
     return this.http.put(url, cliente, { responseType: 'text' });
   }
 
-  // Assinatura: mudar de void para Observable<void>
-  // Corpo do metodo: adicionar return this.http...
-  excluir(codigo: string): Observable<void> {
+  excluir(codigo: string): Observable<string> {
     const url = `${this.API}/${codigo}`;
-    return this.http.delete<void>(url);
+    return this.http.delete(url, { responseType: 'text' });
   }
 }

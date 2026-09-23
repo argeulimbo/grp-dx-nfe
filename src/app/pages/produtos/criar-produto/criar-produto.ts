@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
 import { DxiItemComponent, DxiValidationRuleComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
 import { RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { Produto } from '../../documentos/documentos';
 
@@ -27,7 +26,6 @@ export class CriarProduto implements OnInit {
   };
 
   constructor(
-    private http: HttpClient,
     private changeDetectorRef: ChangeDetectorRef,
     private produtoService: ProdutoService,
   ) {}
@@ -39,7 +37,7 @@ export class CriarProduto implements OnInit {
   criarProduto(produto: Produto) {
     this.produtoService.criar(produto).subscribe((produto) => {
       this.produto = produto;
-      alert('Produto ' + produto.descricao + ' criado!')
+      alert(produto);
     });
   }
 }

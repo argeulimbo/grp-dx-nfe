@@ -5,10 +5,10 @@ import { DxButtonComponent, DxDataGridComponent, DxFormModule, DxSelectBoxCompon
 import { DxiColumnComponent, DxoDropDownOptionsComponent, DxoEditingComponent, DxoLookupComponent } from 'devextreme-angular/ui/nested';
 import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
 
-import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
-import {ClienteService} from '../../../shared/services/cliente.service';
-import { Cliente, ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
-import {ProdutoService} from '../../../shared/services/produto.service';
+import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
+import { ClienteService } from '../../../shared/services/cliente.service';
+import { ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
+import { ProdutoService } from '../../../shared/services/produto.service';
 
 @Component({
   imports: [
@@ -60,14 +60,12 @@ export class CriarNotaFiscalComponent implements OnInit {
     onClick: () => this.abrirModalOuNavegarCriarCliente(),
   };
 
-  // GET all clientes
   carregarClientes() {
     this.clienteService.listar().subscribe(clientes => {
       this.clientes = clientes;
     })
   }
 
-  // GET all produtos
   carregarProdutos() {
     this.produtoService.listar().subscribe(produtos => {
       this.produtos = produtos;
@@ -85,21 +83,15 @@ export class CriarNotaFiscalComponent implements OnInit {
       return acc + (quantidade * valorUnitario);
     }, 0);
 
-    // Reatribui o objeto (nova referência) para o dx-form pegar a mudança do formData
     this.nota = { ...this.nota, valorTotal: total };
     this.changeDetectorRef.detectChanges();
   }
 
-  // @Depreciado - invenção de moda
-  // private proximoCodigoProduto(offset: number): number {
-  //   return Date.now() + offset;
-  // }
-
   criarNota(nota: NotaFiscal) {
     this.notaFiscalService.criar(nota).subscribe(nota => {
       this.nota = nota;
+      alert(nota);
     });
-    alert('CRUZEIRAO CABULOSO');
   }
 
   salvarNota(nota: NotaFiscal) {
