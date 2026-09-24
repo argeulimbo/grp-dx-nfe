@@ -29,8 +29,9 @@ export class ProdutoService {
     });
   }
 
-  excluir(codigo: string): void {
-    this.http.delete(`${this.API}/${codigo}`);
+  excluir(codigo: string): Observable<string> {
+    const url = `${this.API}/${codigo}`;
+    return this.http.delete(url, { responseType: 'text' });
   }
 
   buscarPorCodigo(codigo: string): Observable<Produto> {

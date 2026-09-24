@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DxButtonComponent, DxDataGridComponent, DxTemplateDirective, DxTextBoxComponent } from 'devextreme-angular';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
-import { Router, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import { ProdutoService } from '../../../shared/services/produto.service';
 
 @Component({
@@ -22,10 +21,8 @@ export class ListaProdutoComponent implements OnInit {
   produtos: any[] = [];
 
   constructor(
-    private http: HttpClient,
     private changeDetectorRef: ChangeDetectorRef,
     private produtoService: ProdutoService,
-    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -39,12 +36,13 @@ export class ListaProdutoComponent implements OnInit {
     });
   }
 
-  editarProduto(codigo: string): void {
-    this.router.navigate(['/nfe/notas', codigo]);
+  excluirProduto(codigo: string): void {
+    if(confirm('Deseja excluir este produto?')) {
+      this.produtoService.excluir(codigo).subscribe((produto) => {
+        this.listarProdutos();
+        alert(produto);
+      })
+    }
   }
 
-  excluirProduto(codigo: string): void {
-    this.produtoService.excluir(codigo);
-    alert('Produto excluído!');
-  }
 }
