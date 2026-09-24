@@ -52,6 +52,8 @@ export class EditarNotaFiscalComponent implements OnInit {
   clientes: any[] = [];
   produtos: any[] = [];
 
+  numeroNotaURL: string = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private notaFiscalService: NotaFiscalService,
@@ -73,6 +75,7 @@ export class EditarNotaFiscalComponent implements OnInit {
   private getNumeroNotaURL(): void {
     const numero = this.activatedRoute.snapshot.paramMap.get('numero');
     if (numero) {
+      this.numeroNotaURL = numero;
       this.notaFiscalService.buscarPorNumero(numero).subscribe((res) => (this.nota = res));
     }
   }
@@ -80,9 +83,9 @@ export class EditarNotaFiscalComponent implements OnInit {
   atualizarValorTotal(): void {
   }
 
-  editarNota(nota: NotaFiscal): void {
-    this.notaFiscalService.salvar(nota).subscribe(() => {
-      alert('Nota Fiscal Nº: ' + nota.numero + ' alterada com sucesso!');
+  editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
+    this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe(() => {
+      alert('Nota Fiscal alterada com sucesso!');
       this.router.navigate(['/nfe/notas']);
     });
   }

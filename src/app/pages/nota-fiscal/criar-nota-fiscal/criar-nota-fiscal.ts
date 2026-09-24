@@ -93,11 +93,4 @@ export class CriarNotaFiscalComponent implements OnInit {
       alert(nota);
     });
   }
-
-  salvarNota(nota: NotaFiscal) {
-    this.notaFiscalService.salvar(nota).subscribe(nota => {
-      this.nota = nota;
-    });
-  }
-
 }
