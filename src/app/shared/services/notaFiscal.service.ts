@@ -28,10 +28,10 @@ export class NotaFiscalService {
     return this.http.post(this.API, nota, { responseType: 'text' });
   }
 
-  salvar(nota: NotaFiscal): Observable<NotaFiscal> {
-    return this.http.put<NotaFiscal>(
-      `${this.API}/${nota.numero}`,
-      nota);
+  salvar(nota: NotaFiscal): Observable<string> {
+    return this.http.put(`${this.API}/${nota.numero}`, nota, {
+      responseType: 'text'
+    });
   }
 
   excluir(numero: string): void {

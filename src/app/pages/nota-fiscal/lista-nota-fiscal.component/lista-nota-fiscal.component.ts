@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { DxButtonComponent,
          DxTextBoxComponent,
@@ -6,8 +6,8 @@ import { DxButtonComponent,
 } from 'devextreme-angular';
 import { NotaFiscal } from '../../documentos/documentos';
 
-import { Router, RouterLink } from '@angular/router';
-import {NotaFiscalService} from '../../../shared/services/notaFiscal.service';
+import { RouterLink } from '@angular/router';
+import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 
 @Component({
@@ -29,7 +29,6 @@ export class ListaNotaFiscalComponent implements OnInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private notaFiscalService: NotaFiscalService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {

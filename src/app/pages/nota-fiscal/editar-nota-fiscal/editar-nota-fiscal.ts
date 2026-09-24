@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   DxButtonComponent,
   DxDataGridComponent,
@@ -57,6 +57,7 @@ export class EditarNotaFiscalComponent implements OnInit {
     private notaFiscalService: NotaFiscalService,
     private clienteService: ClienteService,
     private produtoService: ProdutoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -79,5 +80,10 @@ export class EditarNotaFiscalComponent implements OnInit {
   atualizarValorTotal(): void {
   }
 
-  editarNota(nota: any): void {}
+  editarNota(nota: NotaFiscal): void {
+    this.notaFiscalService.salvar(nota).subscribe(() => {
+      alert('Nota Fiscal Nº: ' + nota.numero + ' alterada com sucesso!');
+      this.router.navigate(['/nfe/notas']);
+    });
+  }
 }
