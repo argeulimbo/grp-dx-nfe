@@ -42,8 +42,13 @@ export class ListaNotaFiscalComponent implements OnInit {
     });
   }
 
-  excluirNota(numero: string) {
-    this.notaFiscalService.excluir(numero);
-    alert('Nota Fiscal Nº - ' + numero + ' excluída!');
+  excluirNota(numero: string): void {
+    if(confirm('Deseja excluir este registro? ')) {
+      this.notaFiscalService.excluir(numero).subscribe( (nota) => {
+        this.listarNotas();
+        // Trocar o alert
+        // alert(nota);
+      })
+    }
   }
 }

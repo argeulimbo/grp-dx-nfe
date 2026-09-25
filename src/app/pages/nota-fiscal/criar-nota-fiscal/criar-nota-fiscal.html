@@ -48,7 +48,7 @@
           <dx-select-box class="clientes-select-box"
                          [dataSource]="clientes"
                          displayExpr="nome"
-                         valueExpr="id"
+                         valueExpr="codigo"
                          [(value)]="nota.codigoCliente"
                          [searchEnabled]="true"
                          searchMode="contains"
@@ -94,8 +94,8 @@
         </dxo-editing>
 
         <!-- Select Produto -->
-        <dxi-column dataField="produtoCodigo" caption="Produto">
-          <dxo-lookup [dataSource]="produtos" displayExpr="descricao" valueExpr="id" searchMode="contains"></dxo-lookup>
+        <dxi-column dataField="codigoProduto" caption="Produto">
+          <dxo-lookup [dataSource]="produtos" displayExpr="descricao" valueExpr="codigo" searchMode="contains"></dxo-lookup>
         </dxi-column>
 
         <!-- Valor Unitário -->

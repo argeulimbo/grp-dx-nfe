@@ -34,7 +34,8 @@ export class NotaFiscalService {
     });
   }
 
-  excluir(numero: string): void {
-    this.http.delete(`${this.API}/${numero}`);
+  excluir(numero: string): Observable<string> {
+    const url = `${this.API}/${numero}`;
+    return this.http.delete(url, { responseType: 'text' });
   }
 }

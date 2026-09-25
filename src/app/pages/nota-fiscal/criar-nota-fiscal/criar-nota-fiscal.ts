@@ -31,7 +31,7 @@ export class CriarNotaFiscalComponent implements OnInit {
 
   nota: any = {
     numero:           null,
-    codigoCliente:    null,
+    codigoCliente:    '',
     dataEmissao:      new Date(),
     valorTotal:       0,
     itens:            [] as ItemNotaGrid[]
@@ -91,6 +91,9 @@ export class CriarNotaFiscalComponent implements OnInit {
     this.notaFiscalService.criar(nota).subscribe(nota => {
       this.nota = nota;
       alert(nota);
+      this.router.navigate(['/nfe/notas']);
     });
   }
+
+
 }

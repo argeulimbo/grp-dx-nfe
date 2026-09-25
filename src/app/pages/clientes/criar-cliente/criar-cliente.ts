@@ -21,6 +21,7 @@ export class CriarCliente implements OnInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private clienteService: ClienteService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class CriarCliente implements OnInit {
     this.clienteService.criar(cliente).subscribe((cliente) => {
       this.cliente = cliente;
       alert(cliente);
+      this.router.navigate(['/nfe/clientes']);
     });
   }
 }

@@ -110,5 +110,4 @@ export class EditarNotaFiscalComponent implements OnInit {
       this.nota.cliente = clienteSelecionado;
     }
   }
-
 }
