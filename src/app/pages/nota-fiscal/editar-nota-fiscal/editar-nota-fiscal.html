@@ -43,7 +43,8 @@
                          [dataSource]="clientes"
                          displayExpr="nome"
                          valueExpr="id"
-                         [(value)]="nota.cliente!.id"
+                         [value]="nota.cliente?.id"
+                         (onValueChanged)="onClienteChange($event)"
                          [searchEnabled]="true"
                          placeholder="Digite para buscar o cliente..."
                          noDataText="Nenhum cliente encontrado">
@@ -64,7 +65,8 @@
         [showBorders]="true"
         (onRowInserted)="atualizarValorTotal()"
         (onRowUpdated)="atualizarValorTotal()"
-        (onRowRemoved)="atualizarValorTotal()">
+        (onRowRemoved)="atualizarValorTotal()"
+        (onSaved)="atualizarValorTotal()">
 
         <dxo-editing
           mode="cell"
@@ -84,7 +86,7 @@
         </dxi-column>
 
         <!-- Valor Unitário -->
-        <dxi-column dataField="produto.valorUnitario" caption="Vlr. Unit" [format]="'R$ #,##0.0'">
+        <dxi-column dataField="produto.valorUnitario" caption="Vlr. Unit" [format]="'R$ #.##0,0'" [allowEditing]="false">
         </dxi-column>
 
         <!-- Quantidade -->

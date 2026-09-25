@@ -46,6 +46,7 @@ export class EditarNotaFiscalComponent implements OnInit {
       nome: '',
     },
     dataEmissao: new Date(),
+    valorTotal: 0,
     itens: [],
   };
 
@@ -76,11 +77,24 @@ export class EditarNotaFiscalComponent implements OnInit {
     const numero = this.activatedRoute.snapshot.paramMap.get('numero');
     if (numero) {
       this.numeroNotaURL = numero;
-      this.notaFiscalService.buscarPorNumero(numero).subscribe((res) => (this.nota = res));
+      this.notaFiscalService.buscarPorNumero(numero).subscribe((res) => {
+        this.nota = res;
+        this.atualizarValorTotal();
+      });
     }
   }
 
   atualizarValorTotal(): void {
+    if (!this.nota?.itens) {
+      this.nota.valorTotal = 0;
+      return;
+    }
+    this.nota.valorTotal = this.nota.itens.reduce((acc, item: any) => {
+      const produto = this.produtos.find(p => p.id === item.produto?.id);
+      const valorUnitario = produto?.valorUnitario || item.produto?.valorUnitario || 0;
+      const quantidade = item.quantidade || 0;
+      return acc + (quantidade * valorUnitario);
+    }, 0);
   }
 
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
@@ -89,4 +103,12 @@ export class EditarNotaFiscalComponent implements OnInit {
       this.router.navigate(['/nfe/notas']);
     });
   }
+
+  onClienteChange(event: any): void {
+    const clienteSelecionado = this.clientes.find(c => c.id === event.value);
+    if (clienteSelecionado) {
+      this.nota.cliente = clienteSelecionado;
+    }
+  }
+
 }

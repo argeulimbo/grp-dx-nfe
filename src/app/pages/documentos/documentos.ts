@@ -8,6 +8,7 @@ export interface NotaFiscal {
   numero?:            string;
   cliente?:     Cliente;
   dataEmissao:          Date;
+  valorTotal?: number;
   itens?: ItemNotaFiscalRequest[];
 }
 
