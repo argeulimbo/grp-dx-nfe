@@ -28,6 +28,8 @@ export class EditarProdutoComponent implements OnInit {
     valorUnitario: 0,
   }
 
+  codigoProdutoURL: string = '';
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private produtoService: ProdutoService,
@@ -38,6 +40,7 @@ export class EditarProdutoComponent implements OnInit {
 
   ngOnInit() {
     this.carregarProduto();
+    this.getCodigoProdutoURL();
   }
 
   carregarProduto() {
@@ -50,15 +53,20 @@ export class EditarProdutoComponent implements OnInit {
     }
   }
 
-  editarProduto(produto: Produto):void {
-    this.produtoService.editarProduto(produto).subscribe({
-     next: () => {
-       notify('Produto editado com sucesso!', 'success', 10000);
-       this.router.navigate(['/nfe/produtos']);
-     },
-      error: (erro) => {
-       notify('Erro ao editar produto: ', erro);
-      }
+  private getCodigoProdutoURL(): void {
+    const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
+    if (codigo) {
+      this.codigoProdutoURL = codigo;
+      this.produtoService.buscarPorCodigo(codigo).subscribe((resultado) => {
+        this.produto = resultado;
+      })
+    }
+  }
+
+  editarProduto(codigoProdutoUrl: string, produto: Produto): void {
+    this.produtoService.editarProduto(this.codigoProdutoURL, produto).subscribe(() => {
+      notify('Produto editado com sucesso!', 'success', 10000);
+      this.router.navigate(['/nfe/produtos']);
     });
   }
 

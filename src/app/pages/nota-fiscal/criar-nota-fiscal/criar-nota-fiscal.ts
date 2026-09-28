@@ -32,7 +32,6 @@ import { NgOptimizedImage } from '@angular/common';
     DxButtonComponent,
     DxToastModule,
     RouterLink,
-    NgOptimizedImage,
   ],
   selector: 'app-criar-nota-fiscal',
   styleUrl: './criar-nota-fiscal.scss',

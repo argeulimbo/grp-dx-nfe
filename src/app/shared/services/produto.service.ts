@@ -19,12 +19,17 @@ export class ProdutoService {
     return this.http.get<Produto[]>(this.API);
   }
 
+  buscarPorCodigo(codigo: string): Observable<Produto> {
+    const url = `${this.API}/${codigo}`;
+    return this.http.get<Produto>(url);
+  }
+
   criar(produto: Produto): Observable<string> {
     return this.http.post(this.API, produto, { responseType: 'text' });
   }
 
-  editarProduto(produto: Produto): Observable<string> {
-    return this.http.put(`${this.API}/${produto.codigo}`, produto, {
+  editarProduto(codigoProdutoURL: string, produto: Produto): Observable<string> {
+    return this.http.put(`${this.API}/${codigoProdutoURL}`, produto, {
       responseType: 'text'
     });
   }
@@ -32,10 +37,5 @@ export class ProdutoService {
   excluir(codigo: string): Observable<string> {
     const url = `${this.API}/${codigo}`;
     return this.http.delete(url, { responseType: 'text' });
-  }
-
-  buscarPorCodigo(codigo: string): Observable<Produto> {
-    const url = `${this.API}/${codigo}`;
-    return this.http.get<Produto>(url);
   }
 }

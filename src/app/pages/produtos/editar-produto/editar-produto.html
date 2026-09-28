@@ -1,4 +1,4 @@
-<h1>Criar Produto</h1>
+<h1>Editar Produto</h1>
 
 <div class="content-block">
 
@@ -52,7 +52,7 @@
 
       <!-- BT Salvar / Cancelar -->
       <div class="div-bt">
-        <dx-button text="Salvar" type="success" (onClick)="editarProduto(produto)"></dx-button>
+        <dx-button text="Salvar" type="success" (onClick)="editarProduto(codigoProdutoURL, produto)"></dx-button>
         <dx-button text="Cancelar" type="danger" routerLink="/nfe/produtos"></dx-button>
       </div>
 
