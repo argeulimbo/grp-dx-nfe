@@ -22,6 +22,7 @@
         <dxi-item itemType="group" caption="Dados Produto" [colCount]="2">
 
           <dxi-item dataField="codigo"
+                    [editorOptions]="{ valueChangeEvent: 'keyup' }"
                     [isRequired]="true">
             <dxo-label text="Código"></dxo-label>
           </dxi-item>

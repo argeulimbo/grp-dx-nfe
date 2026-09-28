@@ -102,7 +102,7 @@ export class EditarNotaFiscalComponent implements OnInit {
 
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
     this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe(() => {
-      notify('Nota Fiscal alterada com sucesso!', 'success', 10000);
+      notify('Nota Fiscal alterada com sucesso!', 'success', 4000);
       this.router.navigate(['/nfe/notas']);
     });
   }

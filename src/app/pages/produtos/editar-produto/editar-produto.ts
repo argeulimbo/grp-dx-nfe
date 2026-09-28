@@ -40,32 +40,22 @@ export class EditarProdutoComponent implements OnInit {
 
   ngOnInit() {
     this.carregarProduto();
-    this.getCodigoProdutoURL();
   }
 
   carregarProduto() {
     const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
     if (codigo) {
+      this.codigoProdutoURL = codigo;
       this.produtoService.buscarPorCodigo(codigo).subscribe((produto) => {
         this.produto = produto;
-        (this.changeDetectorRef.detectChanges());
-      })
-    }
-  }
-
-  private getCodigoProdutoURL(): void {
-    const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
-    if (codigo) {
-      this.codigoProdutoURL = codigo;
-      this.produtoService.buscarPorCodigo(codigo).subscribe((resultado) => {
-        this.produto = resultado;
+        this.changeDetectorRef.detectChanges();
       })
     }
   }
 
   editarProduto(codigoProdutoUrl: string, produto: Produto): void {
     this.produtoService.editarProduto(this.codigoProdutoURL, produto).subscribe(() => {
-      notify('Produto editado com sucesso!', 'success', 10000);
+      notify('Produto editado com sucesso!', 'success', 4000);
       this.router.navigate(['/nfe/produtos']);
     });
   }

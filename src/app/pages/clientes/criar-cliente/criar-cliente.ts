@@ -32,7 +32,7 @@ export class CriarCliente implements OnInit {
   criarCliente(cliente: Cliente) {
     this.clienteService.criar(cliente).subscribe((cliente) => {
       this.cliente = cliente;
-      notify('Cliente criado com sucesso!', 'success', 10000);
+      notify('Cliente criado com sucesso!', 'success', 4000);
       this.router.navigate(['/nfe/clientes']);
     });
   }

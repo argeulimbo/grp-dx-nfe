@@ -89,7 +89,7 @@ export class CriarNotaFiscalComponent implements OnInit {
   criarNota(nota: NotaFiscal) {
     this.notaFiscalService.criar(nota).subscribe((nota) => {
       this.nota = nota;
-      notify(nota, 'success', 10000);
+      notify(nota, 'success', 4000);
       this.router.navigate(['/nfe/notas']);
     });
   }

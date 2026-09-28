@@ -49,7 +49,7 @@ export class ListaProdutoComponent implements OnInit {
     confirm('Deseja excluir este produto?', 'Excluir Produto').then((resultado) => {
       if (resultado) {
         this.produtoService.excluir(codigo).subscribe((produto) => {
-          notify(produto, 'success', 1000);
+          notify(produto, 'success', 4000);
           this.listarProdutos();
         });
       }

@@ -40,7 +40,7 @@ export class CriarProduto implements OnInit {
   criarProduto(produto: Produto) {
     this.produtoService.criar(produto).subscribe((produto) => {
       this.produto = produto;
-      notify(produto, 'success', 10000);
+      notify(produto, 'success', 4000);
       this.router.navigate(['/nfe/produtos']);
     });
   }

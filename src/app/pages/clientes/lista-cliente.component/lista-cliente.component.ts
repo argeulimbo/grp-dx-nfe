@@ -49,7 +49,7 @@ export class ListaClienteComponent implements OnInit {
     confirm('Deseja excluir este cliente?', 'Excluir Cliente').then((resultado) => {
       if (resultado) {
         this.clienteService.excluir(codigo).subscribe((cliente) => {
-          notify(cliente, 'success', 10000);
+          notify(cliente, 'success', 4000);
           this.listarClientes();
         });
       }

@@ -52,7 +52,7 @@ export class ListaNotaFiscalComponent implements OnInit {
     confirm('Deseja excluir este registro?', 'Excluir Nota Fiscal!').then((resultado) => {
       if (resultado) {
         this.notaFiscalService.excluir(numero).subscribe((nota) => {
-          notify(nota, 'success', 10000);
+          notify(nota, 'success', 4000);
           this.listarNotas();
         });
       }

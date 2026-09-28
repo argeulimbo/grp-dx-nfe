@@ -32,8 +32,8 @@ export class ClienteService {
     return this.http.post(this.API, cliente, { responseType: 'text'});
   }
 
-  editarCliente(cliente: Cliente): Observable<string> {
-    const url = `${this.API}/${cliente.codigo}`;
+  editarCliente(codigoClienteURL: string, cliente: Cliente): Observable<string> {
+    const url = `${this.API}/${codigoClienteURL}`;
     return this.http.put(url, cliente, { responseType: 'text' });
   }
 

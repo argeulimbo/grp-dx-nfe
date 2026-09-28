@@ -18,6 +18,8 @@ export class EditarClienteComponent implements OnInit {
     nome: '',
   };
 
+  codigoClienteURL: string = '';
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private clienteService: ClienteService,
@@ -32,6 +34,7 @@ export class EditarClienteComponent implements OnInit {
   carregarCliente() {
     const codigo = this.activatedRoute.snapshot.paramMap.get('codigo');
     if (codigo) {
+      this.codigoClienteURL = codigo;
       this.clienteService.buscarPorCodigo(codigo).subscribe((cliente) => {
         this.cliente = cliente;
         (this.changeDetectorRef.detectChanges());
@@ -39,9 +42,9 @@ export class EditarClienteComponent implements OnInit {
     }
   }
 
-  editarCliente(cliente: Cliente): void {
-    this.clienteService.editarCliente(cliente).subscribe(() => {
-      notify('Cliente código: ' + cliente.codigo + ' atualizado com sucesso!', 'success', 10000);
+  editarCliente(codigoClienteUrl: string, cliente: Cliente): void {
+    this.clienteService.editarCliente(this.codigoClienteURL, cliente).subscribe(() => {
+      notify('Cliente código: ' + cliente.codigo + ' atualizado com sucesso!', 'success', 4000);
       this.router.navigate(['/nfe/clientes']);
     });
   }
