@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { Produto } from '../../documentos/documentos';
 import notify from 'devextreme/ui/notify';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [
@@ -38,10 +39,17 @@ export class CriarProduto implements OnInit {
   }
 
   criarProduto(produto: Produto) {
-    this.produtoService.criar(produto).subscribe((produto) => {
-      this.produto = produto;
-      notify(produto, 'success', 4000);
-      this.router.navigate(['/nfe/produtos']);
+    this.produtoService.criar(produto).subscribe({
+      next: () => {
+        notify('Produto criado com sucesso!', 'success', 4000);
+        this.router.navigate(['/nfe/produtos']);
+      },
+      error: (erro: HttpErrorResponse) => {
+        const mensagemErro = typeof erro.error === 'string'
+        ? erro.error
+          : 'Erro inesperado ao criar produto.';
+        notify(mensagemErro, 'error', 4000);
+      },
     });
   }
 }

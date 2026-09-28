@@ -20,6 +20,7 @@ import { ClienteService } from '../../../shared/services/cliente.service';
 import { ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { NgOptimizedImage } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [
@@ -87,10 +88,17 @@ export class CriarNotaFiscalComponent implements OnInit {
   }
 
   criarNota(nota: NotaFiscal) {
-    this.notaFiscalService.criar(nota).subscribe((nota) => {
-      this.nota = nota;
-      notify(nota, 'success', 4000);
-      this.router.navigate(['/nfe/notas']);
-    });
+    this.notaFiscalService.criar(nota).subscribe({
+        next: () => {
+          notify('NF criada com sucesso!', 'success', 4000);
+          this.router.navigate(['/nfe/notas']);
+        },
+       error: (erro: HttpErrorResponse) => {
+          const mensagemErro = typeof erro.error === 'string'
+          ? erro.error
+          : 'Erro inesperado ao criar nota fiscal.';
+          notify(mensagemErro, 'error', 4000);
+       }
+    })
   }
 }

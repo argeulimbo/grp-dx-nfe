@@ -20,6 +20,7 @@ import { ClienteService } from '../../../shared/services/cliente.service';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { NotaFiscal } from '../../documentos/documentos';
 import notify from 'devextreme/ui/notify';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-nota-fiscal',
@@ -101,10 +102,18 @@ export class EditarNotaFiscalComponent implements OnInit {
   }
 
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
-    this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe(() => {
-      notify('Nota Fiscal alterada com sucesso!', 'success', 4000);
-      this.router.navigate(['/nfe/notas']);
-    });
+    this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe({
+      next: () => {
+        notify('Nota Fiscal alterada com sucesso!', 'success', 4000);
+        this.router.navigate(['/nfe/notas']);
+      },
+      error: (erro: HttpErrorResponse) => {
+        const mensagemErro = typeof erro.error === 'string'
+        ? erro.error
+          : 'Erro inesperado ao editar nota.';
+        notify(mensagemErro, 'error', 4000);
+      }
+    })
   }
 
   onClienteChange(event: any): void {

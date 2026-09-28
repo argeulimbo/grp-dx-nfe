@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import notify from 'devextreme/ui/notify';
 import { Cliente } from '../../documentos/documentos';
 import { ClienteService } from '../../../shared/services/cliente.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [DxButtonComponent, DxFormComponent, DxiItemComponent, DxToastModule,DxoLabelComponent, RouterLink],
@@ -43,10 +44,18 @@ export class EditarClienteComponent implements OnInit {
   }
 
   editarCliente(codigoClienteUrl: string, cliente: Cliente): void {
-    this.clienteService.editarCliente(this.codigoClienteURL, cliente).subscribe(() => {
-      notify('Cliente código: ' + cliente.codigo + ' atualizado com sucesso!', 'success', 4000);
-      this.router.navigate(['/nfe/clientes']);
-    });
+    this.clienteService.editarCliente(codigoClienteUrl, cliente).subscribe({
+      next: () => {
+        notify('Cliente código: ' + cliente.codigo + 'atualizado com sucesso!', 'success', 4000);
+        this.router.navigate(['/nfe/cliente']);
+      },
+      error: (erro: HttpErrorResponse) => {
+        const mensagemErro = typeof erro.error === 'string'
+        ? erro.error
+          : 'Erro inesperado ao editar cliente.';
+        notify(mensagemErro, 'error', 4000);
+      }
+    })
   }
 
 }
