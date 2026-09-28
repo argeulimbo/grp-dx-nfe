@@ -1,11 +1,15 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import { DxButtonComponent,
-         DxTextBoxComponent,
-         DxDataGridComponent, DxTemplateDirective, DxToastModule
+import {
+  DxButtonComponent,
+  DxTextBoxComponent,
+  DxDataGridComponent,
+  DxTemplateDirective,
+  DxToastModule,
 } from 'devextreme-angular';
 import { NotaFiscal } from '../../documentos/documentos';
 import notify from 'devextreme/ui/notify';
+import { confirm } from 'devextreme/ui/dialog';
 
 import { RouterLink } from '@angular/router';
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
@@ -45,11 +49,13 @@ export class ListaNotaFiscalComponent implements OnInit {
   }
 
   excluirNota(numero: string): void {
-    if(confirm('Deseja excluir este registro? ')) {
-      this.notaFiscalService.excluir(numero).subscribe( (nota) => {
-        notify(nota, 'success', 10000);
-        this.listarNotas();
-      })
-    }
+    confirm('Deseja excluir este registro?', 'Excluir Nota Fiscal!').then((resultado) => {
+      if (resultado) {
+        this.notaFiscalService.excluir(numero).subscribe((nota) => {
+          notify(nota, 'success', 10000);
+          this.listarNotas();
+        });
+      }
+    });
   }
 }

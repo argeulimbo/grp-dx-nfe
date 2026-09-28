@@ -5,7 +5,8 @@ import {
   DxDataGridComponent,
   DxFormComponent,
   DxSelectBoxComponent,
-  DxTemplateDirective, DxToastModule,
+  DxTemplateDirective,
+  DxToastModule,
 } from 'devextreme-angular';
 import {
   DxiColumnComponent,
@@ -62,7 +63,7 @@ export class EditarNotaFiscalComponent implements OnInit {
     private notaFiscalService: NotaFiscalService,
     private clienteService: ClienteService,
     private produtoService: ProdutoService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -92,10 +93,10 @@ export class EditarNotaFiscalComponent implements OnInit {
       return;
     }
     this.nota.valorTotal = this.nota.itens.reduce((acc, item: any) => {
-      const produto = this.produtos.find(p => p.id === item.produto?.id);
+      const produto = this.produtos.find((p) => p.id === item.produto?.id);
       const valorUnitario = produto?.valorUnitario || item.produto?.valorUnitario || 0;
       const quantidade = item.quantidade || 0;
-      return acc + (quantidade * valorUnitario);
+      return acc + quantidade * valorUnitario;
     }, 0);
   }
 
@@ -107,7 +108,7 @@ export class EditarNotaFiscalComponent implements OnInit {
   }
 
   onClienteChange(event: any): void {
-    const clienteSelecionado = this.clientes.find(c => c.id === event.value);
+    const clienteSelecionado = this.clientes.find((c) => c.id === event.value);
     if (clienteSelecionado) {
       this.nota.cliente = clienteSelecionado;
     }

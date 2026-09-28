@@ -1,9 +1,19 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { DxButtonComponent, DxDataGridComponent, DxFormModule, DxSelectBoxComponent, DxToastModule } from 'devextreme-angular';
+import {
+  DxButtonComponent,
+  DxDataGridComponent,
+  DxFormModule,
+  DxSelectBoxComponent,
+  DxToastModule,
+} from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { DxiColumnComponent, DxoEditingComponent, DxoLookupComponent } from 'devextreme-angular/ui/nested';
+import {
+  DxiColumnComponent,
+  DxoEditingComponent,
+  DxoLookupComponent,
+} from 'devextreme-angular/ui/nested';
 
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { ClienteService } from '../../../shared/services/cliente.service';

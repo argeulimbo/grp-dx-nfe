@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
 import notify from 'devextreme/ui/notify';
+import { confirm } from 'devextreme/ui/dialog';
 
 @Component({
   imports: [
@@ -19,14 +20,13 @@ import notify from 'devextreme/ui/notify';
     RouterLink,
     DxiColumnComponent,
     DxTemplateDirective,
-    DxToastModule
+    DxToastModule,
   ],
   selector: 'app-lista-cliente.component',
   styleUrl: './lista-cliente.component.scss',
   templateUrl: './lista-cliente.component.html',
 })
 export class ListaClienteComponent implements OnInit {
-
   clientes: any[] = [];
 
   constructor(
@@ -46,12 +46,13 @@ export class ListaClienteComponent implements OnInit {
   }
 
   excluirCliente(codigo: string): void {
-    if (confirm('Deseja excluir este cliente?')) {
-      this.clienteService.excluir(codigo).subscribe( (cliente) => {
-        this.listarClientes();
-        notify(cliente, 'success', 10000);
-      })
-    }
+    confirm('Deseja excluir este cliente?', 'Excluir Cliente').then((resultado) => {
+      if (resultado) {
+        this.clienteService.excluir(codigo).subscribe((cliente) => {
+          notify(cliente, 'success', 10000);
+          this.listarClientes();
+        });
+      }
+    });
   }
-
 }
