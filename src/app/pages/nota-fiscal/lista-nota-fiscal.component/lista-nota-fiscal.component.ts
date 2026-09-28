@@ -2,9 +2,10 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { DxButtonComponent,
          DxTextBoxComponent,
-         DxDataGridComponent, DxTemplateDirective
+         DxDataGridComponent, DxTemplateDirective, DxToastModule
 } from 'devextreme-angular';
 import { NotaFiscal } from '../../documentos/documentos';
+import notify from 'devextreme/ui/notify';
 
 import { RouterLink } from '@angular/router';
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
@@ -17,6 +18,7 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
     DxDataGridComponent,
     RouterLink,
     DxiColumnComponent,
+    DxToastModule,
     DxTemplateDirective,
   ],
   selector: 'app-lista-nota-fiscal.component',
@@ -45,9 +47,8 @@ export class ListaNotaFiscalComponent implements OnInit {
   excluirNota(numero: string): void {
     if(confirm('Deseja excluir este registro? ')) {
       this.notaFiscalService.excluir(numero).subscribe( (nota) => {
+        notify(nota, 'success', 10000);
         this.listarNotas();
-        // Trocar o alert
-        // alert(nota);
       })
     }
   }

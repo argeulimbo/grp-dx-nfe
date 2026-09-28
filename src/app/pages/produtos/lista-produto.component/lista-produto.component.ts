@@ -1,6 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { DxButtonComponent, DxDataGridComponent, DxTemplateDirective, DxTextBoxComponent } from 'devextreme-angular';
+import {
+  DxButtonComponent,
+  DxDataGridComponent,
+  DxTemplateDirective,
+  DxTextBoxComponent,
+  DxToastModule,
+} from 'devextreme-angular';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
+import notify from 'devextreme/ui/notify';
 import { RouterLink } from '@angular/router';
 import { ProdutoService } from '../../../shared/services/produto.service';
 
@@ -12,6 +19,7 @@ import { ProdutoService } from '../../../shared/services/produto.service';
     DxiColumnComponent,
     RouterLink,
     DxTemplateDirective,
+    DxToastModule
   ],
   selector: 'app-lista-produto.component',
   styleUrl: './lista-produto.component.scss',
@@ -39,8 +47,8 @@ export class ListaProdutoComponent implements OnInit {
   excluirProduto(codigo: string): void {
     if(confirm('Deseja excluir este produto?')) {
       this.produtoService.excluir(codigo).subscribe((produto) => {
+        notify(produto, 'success', 10000);
         this.listarProdutos();
-        alert(produto);
       })
     }
   }

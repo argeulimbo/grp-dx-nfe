@@ -14,7 +14,7 @@
 
       <!-- Imagem da Nota -->
       <div class="img-div">
-        <img src="/nf.png" alt="nota-image">
+        <img ngSrc="/nf.png" alt="nota-image" height="1099" width="1099">
       </div>
 
       <!-- Formulário da Nota Fiscal -->
@@ -54,22 +54,7 @@
                          searchMode="contains"
                          placeholder="Digite para buscar o cliente..."
                          noDataText="Nenhum cliente encontrado"
-
           >
-
-            <!-- Ícone do campo -->
-            <div *dxTemplate="let data of 'dropDownButton'">
-              <i class="dx-icon-user"></i>
-            </div>
-
-            <!-- Botão no Rodapé do Dropdown -->
-            <dxo-drop-down-options>
-              <dxi-toolbar-item
-                widget="dxButton"
-                location="after"
-                [options]="btnNovoClienteOptions">
-              </dxi-toolbar-item>
-            </dxo-drop-down-options>
           </dx-select-box>
         </div>
       </dx-form>

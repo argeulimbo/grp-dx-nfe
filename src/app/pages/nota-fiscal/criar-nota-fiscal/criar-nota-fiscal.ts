@@ -1,40 +1,40 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { DxButtonComponent, DxDataGridComponent, DxFormModule, DxSelectBoxComponent } from 'devextreme-angular';
-import { DxiColumnComponent, DxoDropDownOptionsComponent, DxoEditingComponent, DxoLookupComponent } from 'devextreme-angular/ui/nested';
-import { DxiToolbarItemComponent } from 'devextreme-angular/ui/toolbar';
+import { DxButtonComponent, DxDataGridComponent, DxFormModule, DxSelectBoxComponent, DxToastModule } from 'devextreme-angular';
+import notify from 'devextreme/ui/notify';
+import { DxiColumnComponent, DxoEditingComponent, DxoLookupComponent } from 'devextreme-angular/ui/nested';
 
 import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { ItemNotaGrid, NotaFiscal, Produto } from '../../documentos/documentos';
 import { ProdutoService } from '../../../shared/services/produto.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   imports: [
     DxFormModule,
     DxSelectBoxComponent,
-    DxoDropDownOptionsComponent,
-    DxiToolbarItemComponent,
     DxDataGridComponent,
     DxoEditingComponent,
     DxiColumnComponent,
     DxoLookupComponent,
     DxButtonComponent,
+    DxToastModule,
     RouterLink,
+    NgOptimizedImage,
   ],
   selector: 'app-criar-nota-fiscal',
   styleUrl: './criar-nota-fiscal.scss',
   templateUrl: './criar-nota-fiscal.html',
 })
 export class CriarNotaFiscalComponent implements OnInit {
-
   nota: any = {
-    numero:           null,
-    codigoCliente:    '',
-    dataEmissao:      new Date(),
-    valorTotal:       0,
-    itens:            [] as ItemNotaGrid[]
+    numero: null,
+    codigoCliente: '',
+    dataEmissao: new Date(),
+    valorTotal: 0,
+    itens: [] as ItemNotaGrid[],
   };
 
   clientes: any[] = [];
@@ -45,8 +45,8 @@ export class CriarNotaFiscalComponent implements OnInit {
     private clienteService: ClienteService,
     private notaFiscalService: NotaFiscalService,
     private produtoService: ProdutoService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.carregarClientes();
@@ -54,33 +54,23 @@ export class CriarNotaFiscalComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  btnNovoClienteOptions = {
-    text: '+ Cadastrar Novo Cliente',
-    type: 'default',
-    onClick: () => this.abrirModalOuNavegarCriarCliente(),
-  };
-
   carregarClientes() {
-    this.clienteService.listar().subscribe(clientes => {
+    this.clienteService.listar().subscribe((clientes) => {
       this.clientes = clientes;
-    })
+    });
   }
 
   carregarProdutos() {
-    this.produtoService.listar().subscribe(produtos => {
+    this.produtoService.listar().subscribe((produtos) => {
       this.produtos = produtos;
-    })
-  }
-
-  abrirModalOuNavegarCriarCliente() {
-    return null;
+    });
   }
 
   atualizarValorTotal() {
     const total = (this.nota.itens as ItemNotaGrid[]).reduce((acc, item) => {
       const quantidade = item.quantidade ?? 0;
       const valorUnitario = item.valorUnitario ?? 0;
-      return acc + (quantidade * valorUnitario);
+      return acc + quantidade * valorUnitario;
     }, 0);
 
     this.nota = { ...this.nota, valorTotal: total };
@@ -88,12 +78,10 @@ export class CriarNotaFiscalComponent implements OnInit {
   }
 
   criarNota(nota: NotaFiscal) {
-    this.notaFiscalService.criar(nota).subscribe(nota => {
+    this.notaFiscalService.criar(nota).subscribe((nota) => {
       this.nota = nota;
-      alert(nota);
+      notify(nota, 'success', 10000);
       this.router.navigate(['/nfe/notas']);
     });
   }
-
-
 }

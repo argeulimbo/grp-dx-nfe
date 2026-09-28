@@ -5,7 +5,7 @@ import {
   DxDataGridComponent,
   DxFormComponent,
   DxSelectBoxComponent,
-  DxTemplateDirective,
+  DxTemplateDirective, DxToastModule,
 } from 'devextreme-angular';
 import {
   DxiColumnComponent,
@@ -18,6 +18,7 @@ import { NotaFiscalService } from '../../../shared/services/notaFiscal.service';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { NotaFiscal } from '../../documentos/documentos';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-editar-nota-fiscal',
@@ -34,6 +35,7 @@ import { NotaFiscal } from '../../documentos/documentos';
     DxoEditingComponent,
     DxoLabelComponent,
     DxoLookupComponent,
+    DxToastModule,
     RouterLink,
   ],
 })
@@ -99,7 +101,7 @@ export class EditarNotaFiscalComponent implements OnInit {
 
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
     this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe(() => {
-      alert('Nota Fiscal alterada com sucesso!');
+      notify('Nota Fiscal alterada com sucesso!', 'success', 10000);
       this.router.navigate(['/nfe/notas']);
     });
   }

@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
+import { DxButtonComponent, DxFormComponent, DxToastModule } from 'devextreme-angular';
 import { DxiItemComponent, DxiValidationRuleComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
 import {ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {ProdutoService} from '../../../shared/services/produto.service';
 import {Produto} from '../../documentos/documentos';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   imports: [
@@ -12,6 +13,7 @@ import {Produto} from '../../documentos/documentos';
     DxiItemComponent,
     DxiValidationRuleComponent,
     DxoLabelComponent,
+    DxToastModule,
     RouterLink,
   ],
   selector: 'app-editar-produto',
@@ -51,10 +53,11 @@ export class EditarProdutoComponent implements OnInit {
   editarProduto(produto: Produto):void {
     this.produtoService.editarProduto(produto).subscribe({
      next: () => {
+       notify('Produto editado com sucesso!', 'success', 10000);
        this.router.navigate(['/nfe/produtos']);
      },
       error: (erro) => {
-       console.log('Erro ao editar produto: ', erro);
+       notify('Erro ao editar produto: ', erro);
       }
     });
   }

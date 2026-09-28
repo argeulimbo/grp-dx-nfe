@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
+import { DxButtonComponent, DxFormComponent, DxToastModule } from 'devextreme-angular';
 import { DxiItemComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import notify from 'devextreme/ui/notify';
 import { Cliente } from '../../documentos/documentos';
 import { ClienteService } from '../../../shared/services/cliente.service';
 
 @Component({
-  imports: [DxButtonComponent, DxFormComponent, DxiItemComponent, DxoLabelComponent, RouterLink],
+  imports: [DxButtonComponent, DxFormComponent, DxiItemComponent, DxToastModule,DxoLabelComponent, RouterLink],
   selector: 'app-editar-cliente',
   styleUrl: './editar-cliente.scss',
   templateUrl: './editar-cliente.html',
@@ -22,7 +23,7 @@ export class EditarClienteComponent implements OnInit {
     private clienteService: ClienteService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.carregarCliente();
@@ -40,7 +41,7 @@ export class EditarClienteComponent implements OnInit {
 
   editarCliente(cliente: Cliente): void {
     this.clienteService.editarCliente(cliente).subscribe(() => {
-      alert('Cliente código: ' + cliente.codigo + ' atualizado com sucesso!');
+      notify('Cliente código: ' + cliente.codigo + ' atualizado com sucesso!', 'success', 10000);
       this.router.navigate(['/nfe/clientes']);
     });
   }

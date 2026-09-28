@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { DxButtonComponent, DxFormComponent } from 'devextreme-angular';
+import { DxButtonComponent, DxFormComponent, DxToastModule } from 'devextreme-angular';
 import { DxiItemComponent, DxiValidationRuleComponent, DxoLabelComponent } from 'devextreme-angular/ui/nested';
 import { Router, RouterLink } from '@angular/router';
 import { ProdutoService } from '../../../shared/services/produto.service';
 import { Produto } from '../../documentos/documentos';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   imports: [
@@ -11,6 +12,7 @@ import { Produto } from '../../documentos/documentos';
     DxFormComponent,
     DxiItemComponent,
     DxoLabelComponent,
+    DxToastModule,
     RouterLink,
     DxiValidationRuleComponent,
   ],
@@ -38,7 +40,7 @@ export class CriarProduto implements OnInit {
   criarProduto(produto: Produto) {
     this.produtoService.criar(produto).subscribe((produto) => {
       this.produto = produto;
-      alert(produto);
+      notify(produto, 'success', 10000);
       this.router.navigate(['/nfe/produtos']);
     });
   }

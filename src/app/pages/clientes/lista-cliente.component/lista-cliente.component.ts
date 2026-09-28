@@ -1,8 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { DxButtonComponent, DxDataGridComponent, DxTextBoxComponent, DxTemplateDirective } from 'devextreme-angular';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  DxButtonComponent,
+  DxDataGridComponent,
+  DxTextBoxComponent,
+  DxTemplateDirective,
+  DxToastModule,
+} from 'devextreme-angular';
 import { RouterLink } from '@angular/router';
 import { ClienteService } from '../../../shared/services/cliente.service';
 import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   imports: [
@@ -11,7 +18,8 @@ import { DxiColumnComponent } from 'devextreme-angular/ui/nested';
     DxTextBoxComponent,
     RouterLink,
     DxiColumnComponent,
-    DxTemplateDirective
+    DxTemplateDirective,
+    DxToastModule
   ],
   selector: 'app-lista-cliente.component',
   styleUrl: './lista-cliente.component.scss',
@@ -41,7 +49,7 @@ export class ListaClienteComponent implements OnInit {
     if (confirm('Deseja excluir este cliente?')) {
       this.clienteService.excluir(codigo).subscribe( (cliente) => {
         this.listarClientes();
-        alert(cliente);
+        notify(cliente, 'success', 10000);
       })
     }
   }
