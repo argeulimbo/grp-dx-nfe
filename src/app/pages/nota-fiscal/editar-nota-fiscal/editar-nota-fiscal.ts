@@ -117,9 +117,13 @@ export class EditarNotaFiscalComponent implements OnInit {
   }
 
   onClienteChange(event: any): void {
-    const clienteSelecionado = this.clientes.find((c) => c.id === event.value);
-    if (clienteSelecionado) {
-      this.nota.cliente = clienteSelecionado;
+    if (!event.value) {
+      this.nota.cliente = undefined;
+      return;
     }
+    const clienteSelecionado = this.clientes.find(
+      (c) => c.id === event.value || c.codigo === event.value
+    );
+    this.nota.cliente = clienteSelecionado || undefined;
   }
 }

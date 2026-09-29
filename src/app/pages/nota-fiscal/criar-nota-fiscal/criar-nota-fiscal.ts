@@ -76,6 +76,14 @@ export class CriarNotaFiscalComponent implements OnInit {
     });
   }
 
+  setProdutoValue = (newData: any, value: any): void => {
+    newData.codigoProduto = value;
+    const prod = this.produtos.find((p) => p.codigo == value || p.id == value);
+    if (prod) {
+      newData.valorUnitario = prod.valorUnitario;
+    }
+  };
+
   atualizarValorTotal() {
     const total = (this.nota.itens as ItemNotaGrid[]).reduce((acc, item) => {
       const quantidade = item.quantidade ?? 0;
@@ -89,16 +97,15 @@ export class CriarNotaFiscalComponent implements OnInit {
 
   criarNota(nota: NotaFiscal) {
     this.notaFiscalService.criar(nota).subscribe({
-        next: () => {
-          notify('NF criada com sucesso!', 'success', 4000);
-          this.router.navigate(['/nfe/notas']);
-        },
-       error: (erro: HttpErrorResponse) => {
-          const mensagemErro = typeof erro.error === 'string'
-          ? erro.error
-          : 'Erro inesperado ao criar nota fiscal.';
-          notify(mensagemErro, 'error', 4000);
-       }
-    })
+      next: () => {
+        notify('NF criada com sucesso!', 'success', 4000);
+        this.router.navigate(['/nfe/notas']);
+      },
+      error: (erro: HttpErrorResponse) => {
+        const mensagemErro =
+          typeof erro.error === 'string' ? erro.error : 'Erro inesperado ao criar nota fiscal.';
+        notify(mensagemErro, 'error', 4000);
+      },
+    });
   }
 }
