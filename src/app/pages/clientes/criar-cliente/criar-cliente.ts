@@ -34,14 +34,14 @@ export class CriarCliente implements OnInit {
     this.clienteService.criar(cliente).subscribe({
       next: () => {
         this.cliente = cliente;
-        notify('Cliente criado com sucesso!', 'success', 4000);
+        notify('Cliente criado com sucesso!', 'success', 1000);
         this.router.navigate(['/nfe/clientes']);
       },
       error: (erro: HttpErrorResponse) => {
         const mensagemErro = typeof erro.error === 'string'
         ? erro.error
           : 'Erro inesperado ao criar cliente';
-        notify(mensagemErro, 'error', 4000);
+        notify(mensagemErro, 'error', 1000);
       }
     })
   }

@@ -57,14 +57,14 @@ export class EditarProdutoComponent implements OnInit {
   editarProduto(codigoProdutoUrl: string, produto: Produto): void {
     this.produtoService.editarProduto(this.codigoProdutoURL, produto).subscribe({
       next: () => {
-        notify('Produto editado com sucesso!', 'success', 4000);
+        notify('Produto editado com sucesso!', 'success', 1000);
         this.router.navigate(['/nfe/produtos']);
       },
       error: (erro: HttpErrorResponse) => {
         const mensagemErro = typeof erro.error === 'string'
         ? erro.error
           : 'Erro inesperado ao editar produto';
-        notify(mensagemErro, 'error', 4000);
+        notify(mensagemErro, 'error', 1000);
       }
     })
   }

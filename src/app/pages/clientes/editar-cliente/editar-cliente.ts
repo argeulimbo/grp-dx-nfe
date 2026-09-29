@@ -46,14 +46,14 @@ export class EditarClienteComponent implements OnInit {
   editarCliente(codigoClienteUrl: string, cliente: Cliente): void {
     this.clienteService.editarCliente(codigoClienteUrl, cliente).subscribe({
       next: () => {
-        notify('Cliente código: ' + cliente.codigo + 'atualizado com sucesso!', 'success', 4000);
-        this.router.navigate(['/nfe/cliente']);
+        notify('Cliente código: ' + cliente.codigo + 'atualizado com sucesso!', 'success', 1000);
+        this.router.navigate(['/nfe/clientes']);
       },
       error: (erro: HttpErrorResponse) => {
         const mensagemErro = typeof erro.error === 'string'
         ? erro.error
           : 'Erro inesperado ao editar cliente.';
-        notify(mensagemErro, 'error', 4000);
+        notify(mensagemErro, 'error', 1000);
       }
     })
   }

@@ -41,14 +41,14 @@ export class CriarProduto implements OnInit {
   criarProduto(produto: Produto) {
     this.produtoService.criar(produto).subscribe({
       next: () => {
-        notify('Produto criado com sucesso!', 'success', 4000);
+        notify('Produto criado com sucesso!', 'success', 1000);
         this.router.navigate(['/nfe/produtos']);
       },
       error: (erro: HttpErrorResponse) => {
         const mensagemErro = typeof erro.error === 'string'
         ? erro.error
           : 'Erro inesperado ao criar produto.';
-        notify(mensagemErro, 'error', 4000);
+        notify(mensagemErro, 'error', 1000);
       },
     });
   }

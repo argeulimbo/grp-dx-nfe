@@ -11,6 +11,7 @@ import notify from 'devextreme/ui/notify';
 import { confirm } from 'devextreme/ui/dialog';
 import { RouterLink } from '@angular/router';
 import { ProdutoService } from '../../../shared/services/produto.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [
@@ -48,11 +49,19 @@ export class ListaProdutoComponent implements OnInit {
   excluirProduto(codigo: string): void {
     confirm('Deseja excluir este produto?', 'Excluir Produto').then((resultado) => {
       if (resultado) {
-        this.produtoService.excluir(codigo).subscribe((produto) => {
-          notify(produto, 'success', 4000);
-          this.listarProdutos();
-        });
+        this.produtoService.excluir(codigo).subscribe({
+          next: (produto) => {
+            notify(produto, 'success', 1000);
+            this.listarProdutos();
+          },
+          error: (erro: HttpErrorResponse): void => {
+            const mensagemErro = typeof erro.error === 'string'
+            ? erro.error
+              : 'Erro inesperado ao excluir produto';
+            notify(mensagemErro, 'error', 1000);
+          }
+        })
       }
-    });
+    })
   }
 }
