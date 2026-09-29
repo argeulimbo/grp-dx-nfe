@@ -58,4 +58,13 @@ export class ListaNotaFiscalComponent implements OnInit {
       }
     });
   }
+
+  // calcularValorTotal = (nota: NotaFiscal): number => {
+  //   if (nota.valorTotal != null) {
+  //     return nota.valorTotal;
+  //   }
+  //   return (nota.itens ?? []).reduce(
+  //     (total, item) => total + (item.quantidade ?? 0) * (item.produto?.valorUnitario ?? 0), 0
+  //   );
+  // };
 }

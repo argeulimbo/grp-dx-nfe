@@ -45,6 +45,15 @@
           <span>{{ cell.data.cliente?.codigo }} - {{ cell.data.cliente?.nome }}</span>
         </div>
 
+<!--        &lt;!&ndash; Valor Nota &ndash;&gt;-->
+<!--        <dxi-column caption="Valor Total"-->
+<!--          caption="Valor Total"-->
+<!--          dataType="number"-->
+<!--          [calculateCellValue]="calcularValorTotal"-->
+<!--          [format]="{ type: 'currency', currency: 'BRL', precision: 2 }"-->
+<!--          alignment="right">-->
+<!--        </dxi-column>-->
+
         <!-- Ações -->
         <dxi-column caption="Ações" cellTemplate="acoesTemplate" [width]="120" [allowSorting]="false"></dxi-column>
         <div *dxTemplate="let cell of 'acoesTemplate'">
