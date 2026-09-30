@@ -1,44 +1,33 @@
-export interface ItemNotaFiscalRequest {
-  codigoProduto?:     number;
-  quantidade?:        number;
+export interface Cliente {
+  id?: number;
+  codigo?: string;
+  nome?: string;
+}
+
+export interface Produto {
+  id?: number;
+  codigo?: string;
+  descricao?: string;
+  valorUnitario?: number;
 }
 
 export interface NotaFiscal {
-  id?:                number;
-  numero?:            string;
-  cliente?:     Cliente;
-  dataEmissao:          Date;
+  id?: number;
+  numero?: string;
+  cliente?: Cliente;
+  dataEmissao: Date;
   valorTotal?: number;
   itens?: ItemNotaFiscalRequest[];
 }
 
-export interface Cliente {
-  id?:                number;
-  codigo?:            string;
-  nome?:              string;
-}
-
-export interface ItemNotaFiscal {
-  notaFiscal?:
-    {
-      numero?: string
-    };
-  produto?:
-    {
-      codigo?: number
-    };
+export interface ItemNotaFiscalRequest {
+  codigoProduto?: string;
   quantidade?: number;
-}
-
-export interface Produto {
-  id?:              number;
-  codigo?:          string;
-  descricao?:       string;
-  valorUnitario?:   number;
+  valorUnitario?: number;
 }
 
 export interface ItemNotaGrid {
-  descricaoProduto?:  string;
-  quantidade?:        number;
-  valorUnitario?:     number;
+  descricaoProduto?: string;
+  quantidade?: number;
+  valorUnitario?: number;
 }

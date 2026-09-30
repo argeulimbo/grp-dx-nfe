@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import {
   DxButtonComponent,
   DxDataGridComponent,
@@ -68,38 +69,39 @@ export class EditarNotaFiscalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.carregarListas();
-    this.getNumeroNotaURL();
-  }
+    this.numeroNotaURL = this.activatedRoute.snapshot.paramMap.get('numero') ?? '';
+    if (!this.numeroNotaURL) return;
 
-  private carregarListas(): void {
-    this.clienteService.listar().subscribe((res) => (this.clientes = res));
-    this.produtoService.listar().subscribe((res) => (this.produtos = res));
-  }
-
-  private getNumeroNotaURL(): void {
-    const numero = this.activatedRoute.snapshot.paramMap.get('numero');
-    if (numero) {
-      this.numeroNotaURL = numero;
-      this.notaFiscalService.buscarPorNumero(numero).subscribe((res) => {
-        this.nota = res;
-        this.atualizarValorTotal();
-      });
-    }
+    forkJoin({
+      clientes: this.clienteService.listar(),
+      produtos: this.produtoService.listar(),
+      nota: this.notaFiscalService.buscarPorNumero(this.numeroNotaURL),
+    }).subscribe(({ clientes, produtos, nota }) => {
+      this.clientes = clientes;
+      this.produtos = produtos;
+      this.nota = {
+        ...nota,
+        itens: (nota.itens ?? []).map((i: any) => ({
+          codigoProduto: i.produto?.codigo,
+          quantidade: i.quantidade,
+          valorUnitario: i.quantidade ? i.totalValor / i.quantidade : 0,
+        })),
+      };
+      this.atualizarValorTotal();
+    });
   }
 
   atualizarValorTotal(): void {
-    if (!this.nota?.itens) {
-      this.nota.valorTotal = 0;
-      return;
-    }
-    this.nota.valorTotal = this.nota.itens.reduce((acc, item: any) => {
-      const produto = this.produtos.find((p) => p.id === item.produto?.id);
-      const valorUnitario = produto?.valorUnitario || item.produto?.valorUnitario || 0;
-      const quantidade = item.quantidade || 0;
-      return acc + quantidade * valorUnitario;
-    }, 0);
+    this.nota.valorTotal = (this.nota.itens ?? []).reduce(
+      (acc, item) => acc + (item.quantidade ?? 0) * (item.valorUnitario ?? 0),
+      0,
+    );
   }
+
+  setProdutoValue = (newData: any, value: any): void => {
+    newData.codigoProduto = value;
+    newData.valorUnitario = this.produtos.find((p) => p.codigo === value)?.valorUnitario;
+  };
 
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
     this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe({
@@ -108,12 +110,11 @@ export class EditarNotaFiscalComponent implements OnInit {
         this.router.navigate(['/nfe/notas']);
       },
       error: (erro: HttpErrorResponse) => {
-        const mensagemErro = typeof erro.error === 'string'
-        ? erro.error
-          : 'Erro inesperado ao editar nota.';
+        const mensagemErro =
+          typeof erro.error === 'string' ? erro.error : 'Erro inesperado ao editar nota.';
         notify(mensagemErro, 'error', 4000);
-      }
-    })
+      },
+    });
   }
 
   onClienteChange(event: any): void {
@@ -122,7 +123,7 @@ export class EditarNotaFiscalComponent implements OnInit {
       return;
     }
     const clienteSelecionado = this.clientes.find(
-      (c) => c.id === event.value || c.codigo === event.value
+      (c) => c.id === event.value || c.codigo === event.value,
     );
     this.nota.cliente = clienteSelecionado || undefined;
   }

@@ -73,17 +73,21 @@
         </dxo-editing>
 
         <!-- Coluna Produto  -->
-        <dxi-column dataField="produto.id" caption="Produto">
+        <dxi-column dataField="codigoProduto" caption="Produto" [setCellValue]="setProdutoValue">
           <dxo-lookup
             [dataSource]="produtos"
             displayExpr="descricao"
-            valueExpr="id"
+            valueExpr="codigo"
             searchMode="contains">
           </dxo-lookup>
         </dxi-column>
 
         <!-- Valor Unitário -->
-        <dxi-column dataField="produto.valorUnitario" caption="Vlr. Unit" [format]="'R$ #.##0,0'" [allowEditing]="false">
+        <dxi-column
+          dataField="valorUnitario"
+          caption="Vlr. Unit"
+          [format]="{ type: 'currency', currency: 'BRL', precision: 2 }"
+          [allowEditing]="false">
         </dxi-column>
 
         <!-- Quantidade -->
