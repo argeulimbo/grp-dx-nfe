@@ -103,6 +103,7 @@ export class EditarNotaFiscalComponent implements OnInit {
     newData.valorUnitario = this.produtos.find((p) => p.codigo === value)?.valorUnitario;
   };
 
+  /*
   editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
     this.notaFiscalService.salvar(this.numeroNotaURL, nota).subscribe({
       next: () => {
@@ -114,6 +115,29 @@ export class EditarNotaFiscalComponent implements OnInit {
           typeof erro.error === 'string' ? erro.error : 'Erro inesperado ao editar nota.';
         notify(mensagemErro, 'error', 4000);
       },
+    });
+  }
+  */
+
+  editarNota(numeroNotaUrl: string, nota: NotaFiscal): void {
+    const payload = {
+      ...nota,
+      itens: (nota.itens ?? []).map((i) => ({
+        produto: { codigo: i.codigoProduto },
+        quantidade: i.quantidade,
+        totalValor: (i.quantidade ?? 0) * (i.valorUnitario ?? 0),
+      })),
+    };
+    this.notaFiscalService.salvar(this.numeroNotaURL, payload as any).subscribe({
+      next: () => {
+        notify('Nota Fiscal alterada com sucesso!', 'success', 1000);
+        this.router.navigate(['/nfe/notas']);
+      },
+      error: (erro: HttpErrorResponse) => {
+        const mensagemErro =
+          typeof erro.error === 'string' ? erro.error : 'Erro inesperado ao editar nota.';
+        notify(mensagemErro, 'error', 1000);
+      }
     });
   }
 
